@@ -11,7 +11,7 @@ export function About() {
         <FadeIn>
           <SectionHeading
             eyebrow="Sobre Estac"
-            title="Un estudio pequeño, por decisión."
+            title="Experiencia senior, relación directa."
             description="Ingeniería de software especializada en arquitectura, desarrollo e IA aplicada. Sin capas intermedias: quien entiende el problema es quien diseña y construye la solución."
           />
           <p className="display-row mt-10 max-w-xl font-display font-semibold text-brand">
