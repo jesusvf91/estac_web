@@ -8,27 +8,34 @@ type LogoProps = {
   variant?: LogoVariant;
 };
 
+/** Prefijo de GitHub Pages (ej. /estac_web). Vacío en local. */
+const basePath = process.env.PAGES_BASE_PATH || "";
+
+function asset(path: string) {
+  return `${basePath}${path}`;
+}
+
 const variants = {
   full: {
-    src: "/logo.svg",
+    src: asset("/logo.svg"),
     alt: "Estac",
     width: 546,
     height: 198,
   },
   mark: {
-    src: "/logo-mark.svg",
+    src: asset("/logo-mark.svg"),
     alt: "Estac",
     width: 514,
     height: 110,
   },
   fullImpulse: {
-    src: "/logo-impulse.svg",
+    src: asset("/logo-impulse.svg"),
     alt: "Estac",
     width: 529,
     height: 149,
   },
   markImpulse: {
-    src: "/logo-mark-impulse.svg",
+    src: asset("/logo-mark-impulse.svg"),
     alt: "Estac",
     width: 521,
     height: 107,
@@ -40,14 +47,14 @@ export function Logo({
   priority = false,
   variant = "mark",
 }: LogoProps) {
-  const asset = variants[variant];
+  const logo = variants[variant];
 
   return (
     <Image
-      src={asset.src}
-      alt={asset.alt}
-      width={asset.width}
-      height={asset.height}
+      src={logo.src}
+      alt={logo.alt}
+      width={logo.width}
+      height={logo.height}
       className={`w-auto ${className}`}
       style={{ width: "auto" }}
       priority={priority}

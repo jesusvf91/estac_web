@@ -8,6 +8,10 @@ const nextConfig: NextConfig = {
   images: {
     unoptimized: true,
   },
+  // Disponible en el build estático para prefijar assets públicos
+  env: {
+    PAGES_BASE_PATH: basePath,
+  },
   ...(basePath
     ? {
         basePath,
