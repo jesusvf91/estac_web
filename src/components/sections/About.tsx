@@ -1,76 +1,58 @@
 import { FadeIn } from "@/components/ui/FadeIn";
+import { Button } from "@/components/ui/Button";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-
-const values = [
-  {
-    title: "Cercanía",
-    description:
-      "Hablamos claro, sin jerga innecesaria. Entendemos el día a día de un negocio que está creciendo.",
-  },
-  {
-    title: "Criterio sólido",
-    description:
-      "Detrás hay experiencia construyendo software en entornos exigentes: calidad, seguridad y escala cuando hace falta.",
-  },
-  {
-    title: "Acompañamiento",
-    description:
-      "No desaparecemos al publicar. Te ayudamos a usar lo construido y a mejorarlo cuando crezcas.",
-  },
-];
-
-const credentials = [
-  "+10 años en desarrollo y arquitectura de software",
-  "Experiencia en sectores de alta exigencia (finanzas, seguros y telecomunicaciones)",
-  "Liderazgo técnico, cloud y formación de equipos",
-];
+import { site } from "@/lib/site";
 
 export function About() {
   return (
     <Section id="nosotros">
-      <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
+      <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-start lg:gap-16">
         <FadeIn>
           <SectionHeading
             align="left"
-            eyebrow="Quiénes somos"
-            title="Capacidad seria, trato cercano"
-            description="Estac nace para acercar tecnología de verdad a negocios que crecen: desde una primera web hasta sistemas más complejos. Explicamos, construimos y nos quedamos cerca."
+            eyebrow="Sobre Estac"
+            title="Tecnología con experiencia detrás."
+            description="Estac es una empresa de ingeniería de software especializada en arquitectura, desarrollo y soluciones de inteligencia artificial."
           />
           <p className="mt-5 max-w-xl text-sm leading-relaxed text-muted sm:text-base">
-            Detrás de Estac hay experiencia liderando desarrollo full stack y
-            transformación digital. Esa trayectoria respalda la calidad; Estac
-            es el espacio donde la ponemos al servicio de tu negocio, con
-            cercanía y sin rodeos.
+            Trabajamos directamente con equipos tecnológicos para resolver
+            problemas concretos, desde una primera prueba de concepto hasta
+            soluciones productivas que puedan evolucionar con el negocio.
           </p>
-
-          <ul className="mt-6 space-y-2.5">
-            {credentials.map((item) => (
-              <li
-                key={item}
-                className="flex items-start gap-2.5 text-sm text-foreground/90"
-              >
-                <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brand" />
-                {item}
-              </li>
-            ))}
-          </ul>
+          <p className="mt-4 max-w-xl text-sm leading-relaxed text-foreground/80 sm:text-base">
+            Estac no vende horas de programación. Vende capacidad para entender,
+            diseñar y resolver problemas tecnológicos.
+          </p>
         </FadeIn>
 
-        <div className="grid gap-4">
-          {values.map((item, index) => (
-            <FadeIn key={item.title} delay={index * 0.06}>
-              <div className="rounded-2xl border border-border/80 bg-white/70 p-5 backdrop-blur-sm sm:p-6">
-                <h3 className="font-display text-base font-semibold tracking-tight text-foreground">
-                  {item.title}
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted">
-                  {item.description}
-                </p>
-              </div>
-            </FadeIn>
-          ))}
-        </div>
+        <FadeIn delay={0.08}>
+          <div className="rounded-2xl border border-border bg-white p-6 shadow-[0_28px_70px_-48px_rgba(7,38,51,0.45)] sm:p-8">
+            <p className="text-xs font-semibold tracking-[0.16em] text-teal uppercase">
+              Equipo fundador
+            </p>
+            <h3 className="mt-4 font-display text-2xl font-semibold tracking-tight text-foreground">
+              {site.founder.name}
+            </h3>
+            <p className="mt-1 text-sm font-medium text-brand">
+              {site.founder.role}
+            </p>
+            <p className="mt-4 text-sm leading-relaxed text-muted">
+              Profesional de tecnología con experiencia en desarrollo de software,
+              arquitectura y liderazgo técnico de proyectos empresariales.
+            </p>
+            <div className="mt-6">
+              <Button
+                href={site.founder.linkedin}
+                variant="secondary"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Ver LinkedIn
+              </Button>
+            </div>
+          </div>
+        </FadeIn>
       </div>
     </Section>
   );

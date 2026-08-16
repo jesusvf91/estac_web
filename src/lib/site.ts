@@ -9,6 +9,11 @@ export const site = {
   tagline: "Software, arquitectura e IA aplicada",
   description:
     "Empresa de desarrollo y arquitectura de software impulsada por inteligencia artificial. Ayudamos a empresas en Chile a resolver problemas tecnológicos concretos: modernización, integración, cloud y desarrollo acelerado con IA.",
+  founder: {
+    name: "Jesús Vargas",
+    role: "Fundador · Arquitectura & Software Engineering",
+    linkedin: "https://www.linkedin.com/in/jesus-vf91/",
+  },
 } as const;
 
 export const contactLinks = {

@@ -48,8 +48,8 @@ export function CTA() {
                 ¿Tienes un problema tecnológico que resolver?
               </h2>
               <p className="mt-4 max-w-xl text-base leading-relaxed text-muted sm:text-lg">
-                Cuéntanos qué necesitas. Podemos ayudarte a evaluar el problema,
-                definir una arquitectura y construir una primera solución.
+                Cuéntanos qué necesitas. Podemos ayudarte a entender el problema,
+                definir una solución y construir una primera etapa.
               </p>
 
               <div className="mt-8 border-t border-border">
@@ -82,10 +82,10 @@ export function CTA() {
 
               <div className="mt-6 flex flex-col gap-3 sm:flex-row">
                 <Button href={contactLinks.email} size="lg">
-                  Hablemos
+                  Cuéntanos qué necesitas
                 </Button>
-                <Button href={contactLinks.whatsapp} variant="secondary" size="lg">
-                  Cuéntanos tu desafío
+                <Button href="#enfoque" variant="secondary" size="lg">
+                  Conoce nuestro enfoque
                 </Button>
               </div>
             </div>

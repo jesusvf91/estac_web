@@ -5,10 +5,10 @@ import { site } from "@/lib/site";
 const footerLinks = [
   { href: "#capacidades", label: "Qué hacemos" },
   { href: "#problemas", label: "Problemas" },
+  { href: "#enfoque", label: "Cómo trabajamos" },
   { href: "#ia", label: "IA" },
-  { href: "#enfoque", label: "Enfoque" },
-  { href: "#tecnologias", label: "Tecnología" },
   { href: "#para-quien", label: "Para quién" },
+  { href: "#nosotros", label: "Nosotros" },
   { href: "#contacto", label: "Contacto" },
 ];
 
@@ -24,8 +24,8 @@ export function Footer() {
               <Logo variant="mark" className="h-6 sm:h-7" />
             </a>
             <p className="mt-4 text-sm leading-relaxed text-muted">
-              {site.tagline}. Software, arquitectura e inteligencia artificial para
-              resolver problemas reales de negocio.
+              {site.tagline}. Capacidad para entender, diseñar y resolver
+              problemas tecnológicos.
             </p>
           </div>
 

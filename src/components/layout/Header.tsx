@@ -9,9 +9,9 @@ import { Logo } from "@/components/ui/Logo";
 const links = [
   { href: "#capacidades", label: "Qué hacemos" },
   { href: "#problemas", label: "Problemas" },
+  { href: "#enfoque", label: "Cómo trabajamos" },
   { href: "#ia", label: "IA" },
-  { href: "#enfoque", label: "Enfoque" },
-  { href: "#para-quien", label: "Para quién" },
+  { href: "#nosotros", label: "Nosotros" },
 ];
 
 export function Header() {
@@ -45,7 +45,7 @@ export function Header() {
           <Logo priority variant="mark" className="h-5 sm:h-5.5" />
         </a>
 
-        <nav className="hidden items-center gap-6 lg:flex">
+        <nav className="hidden items-center gap-5 lg:flex">
           {links.map((link) => (
             <a
               key={link.href}
@@ -59,7 +59,7 @@ export function Header() {
 
         <div className="hidden md:block">
           <Button href="#contacto" size="md">
-            Hablemos
+            Cuéntanos tu desafío
           </Button>
         </div>
 
@@ -67,7 +67,7 @@ export function Header() {
           type="button"
           aria-label={open ? "Cerrar menú" : "Abrir menú"}
           aria-expanded={open}
-          className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-border bg-white/90 md:hidden"
+          className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-border bg-white/90 lg:hidden"
           onClick={() => setOpen((v) => !v)}
         >
           <span className="sr-only">Menú</span>
@@ -92,7 +92,7 @@ export function Header() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.2 }}
-            className="border-b border-border bg-white md:hidden"
+            className="border-b border-border bg-white lg:hidden"
           >
             <Container className="flex flex-col gap-1 py-4">
               {links.map((link) => (
@@ -111,7 +111,7 @@ export function Header() {
                   className="w-full"
                   onClick={() => setOpen(false)}
                 >
-                  Hablemos
+                  Cuéntanos tu desafío
                 </Button>
               </div>
             </Container>

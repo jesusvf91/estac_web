@@ -25,7 +25,7 @@ const problems = [
   },
   {
     category: "Apoyo técnico",
-    quote: "Nuestro equipo interno necesita apoyo técnico especializado.",
+    quote: "Nuestro equipo necesita capacidad técnica especializada.",
   },
   {
     category: "Capacidad externa",
@@ -33,7 +33,8 @@ const problems = [
   },
   {
     category: "Arquitectura",
-    quote: "Necesitamos evaluar nuestra arquitectura antes de seguir creciendo.",
+    quote:
+      "Necesitamos definir una arquitectura antes de comenzar un desarrollo importante.",
   },
 ] as const;
 
@@ -44,8 +45,8 @@ export function Problems() {
         <FadeIn>
           <SectionHeading
             eyebrow="Problemas que resolvemos"
-            title="Estos son los desafíos que resolvemos."
-            description="Si reconoces alguno en tu empresa, podemos ayudarte a evaluarlo, diseñar una solución y construirla."
+            title="Problemas tecnológicos que podemos resolver."
+            description="No partimos de una tecnología. Partimos de un problema."
           />
         </FadeIn>
 

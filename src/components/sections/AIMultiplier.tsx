@@ -1,20 +1,20 @@
 import { FadeIn } from "@/components/ui/FadeIn";
 import { Section } from "@/components/ui/Section";
 
-const accelerated = [
+const buildBetter = [
   "Análisis y exploración de código",
   "Prototipado y validación rápida",
   "Generación de código asistida",
-  "Documentación y pruebas",
+  "Testing y documentación",
   "Automatización de tareas repetitivas",
 ] as const;
 
-const human = [
-  "Arquitectura y decisiones de diseño",
-  "Seguridad y criterios de calidad",
-  "Entendimiento del negocio",
-  "Diseño técnico sostenible",
-  "Priorización y alcance realista",
+const resolveBusiness = [
+  "Automatización de procesos",
+  "Asistentes internos",
+  "Procesamiento de información",
+  "Búsqueda inteligente",
+  "Análisis e integración con sistemas existentes",
 ] as const;
 
 export function AIMultiplier() {
@@ -46,20 +46,24 @@ export function AIMultiplier() {
                 <span className="text-teal-soft">La potencia.</span>
               </h2>
               <p className="mt-6 max-w-2xl text-base leading-relaxed text-white/75 sm:text-lg">
-                Usamos inteligencia artificial durante el desarrollo para acelerar
-                análisis, prototipado, generación de código, documentación y
-                pruebas. Reducimos tiempos sin ceder las decisiones que requieren
-                criterio humano.
+                Usamos inteligencia artificial de dos formas distintas: para
+                construir software con más velocidad, y para incorporar IA en
+                procesos reales de negocio. No son lo mismo.
               </p>
             </div>
 
             <div className="mt-14 grid gap-10 border-t border-white/15 pt-10 lg:grid-cols-2 lg:gap-16">
               <Column
-                title="Dónde acelera la IA"
-                items={accelerated}
+                title="IA para construir mejor"
+                description="Aceleramos el trabajo de ingeniería sin ceder decisiones de arquitectura, seguridad ni alcance."
+                items={buildBetter}
                 accent
               />
-              <Column title="Dónde decide la experiencia" items={human} />
+              <Column
+                title="IA para resolver problemas de negocio"
+                description="Ayudamos a pasar de la experimentación a capacidades útiles dentro de procesos y sistemas existentes."
+                items={resolveBusiness}
+              />
             </div>
           </div>
         </div>
@@ -70,18 +74,21 @@ export function AIMultiplier() {
 
 function Column({
   title,
+  description,
   items,
   accent = false,
 }: {
   title: string;
+  description: string;
   items: readonly string[];
   accent?: boolean;
 }) {
   return (
     <div>
-      <h3 className="font-display text-xs font-semibold tracking-[0.16em] text-white/60 uppercase">
+      <h3 className="font-display text-lg font-semibold tracking-tight text-white">
         {title}
       </h3>
+      <p className="mt-3 text-sm leading-relaxed text-white/65">{description}</p>
       <ul className="mt-6 space-y-4">
         {items.map((item) => (
           <li

@@ -5,33 +5,39 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 const capabilities = [
   {
     title: "Desarrollo de software",
-    description:
-      "Aplicaciones, APIs, microservicios y soluciones empresariales desarrolladas a la medida.",
+    problem: "Necesitas una aplicación, API o sistema a medida para un objetivo concreto.",
+    action: "Diseñamos y construimos la solución con alcance claro y foco en entrega.",
+    result: "Software funcional, mantenible y alineado al negocio.",
   },
   {
     title: "Arquitectura de software",
-    description:
-      "Diseñamos arquitecturas robustas, escalables y mantenibles para nuevos proyectos y sistemas existentes.",
+    problem: "Tu sistema necesita crecer, pero la arquitectura actual se vuelve una limitación.",
+    action: "Evaluamos el contexto y diseñamos una solución técnica preparada para evolucionar.",
+    result: "Arquitectura clara, mantenible y alineada a las necesidades reales.",
   },
   {
     title: "Modernización",
-    description:
-      "Ayudamos a evolucionar aplicaciones y arquitecturas legacy hacia tecnologías y patrones modernos.",
+    problem: "Tienes aplicaciones o plataformas legacy que frenan la operación o el crecimiento.",
+    action: "Evolucionamos lo existente hacia patrones modernos sin reescrituras innecesarias.",
+    result: "Un camino controlado de modernización, sin detener el negocio.",
   },
   {
     title: "Integración",
-    description:
-      "Conectamos sistemas, servicios y fuentes de información mediante APIs e integraciones diseñadas para el entorno real de cada empresa.",
+    problem: "Tus sistemas no se comunican o la información queda atrapada en silos.",
+    action: "Diseñamos APIs e integraciones adaptadas al entorno real de tu empresa.",
+    result: "Flujos de información confiables entre sistemas y equipos.",
   },
   {
     title: "IA aplicada",
-    description:
-      "Incorporamos inteligencia artificial donde realmente aporta valor: automatización, asistentes, procesamiento de información y análisis.",
+    problem: "Quieres incorporar IA, pero sin demos aisladas ni promesas vacías.",
+    action: "Aplicamos IA donde aporta valor: automatización, asistentes, análisis e integración.",
+    result: "Una capacidad útil dentro de un proceso o producto real.",
   },
   {
     title: "Prototipos y PoC",
-    description:
-      "Convertimos una idea en una prueba funcional para validar rápidamente una solución antes de realizar una inversión mayor.",
+    problem: "Tienes una idea o hipótesis que necesitas validar antes de invertir más.",
+    action: "Construimos una prueba funcional en un alcance acotado.",
+    result: "Evidencia para decidir con más seguridad el siguiente paso.",
   },
 ] as const;
 
@@ -46,7 +52,7 @@ export function Services() {
         />
       </FadeIn>
 
-      <div className="mt-12 grid gap-x-14 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-12 grid gap-x-12 gap-y-2 sm:grid-cols-2 lg:grid-cols-3">
         {capabilities.map((item, index) => (
           <FadeIn key={item.title} delay={index * 0.05}>
             <article className="group relative border-t-2 border-border py-7 transition-colors duration-300 hover:border-brand">
@@ -56,9 +62,26 @@ export function Services() {
               <h3 className="mt-4 font-display text-xl font-semibold tracking-tight text-foreground">
                 {item.title}
               </h3>
-              <p className="mt-3 text-sm leading-relaxed text-muted">
-                {item.description}
-              </p>
+              <dl className="mt-4 space-y-3 text-sm leading-relaxed">
+                <div>
+                  <dt className="text-xs font-semibold tracking-[0.12em] text-muted uppercase">
+                    Problema
+                  </dt>
+                  <dd className="mt-1 text-foreground/85">{item.problem}</dd>
+                </div>
+                <div>
+                  <dt className="text-xs font-semibold tracking-[0.12em] text-muted uppercase">
+                    Qué hacemos
+                  </dt>
+                  <dd className="mt-1 text-foreground/85">{item.action}</dd>
+                </div>
+                <div>
+                  <dt className="text-xs font-semibold tracking-[0.12em] text-teal uppercase">
+                    Resultado
+                  </dt>
+                  <dd className="mt-1 font-medium text-foreground">{item.result}</dd>
+                </div>
+              </dl>
             </article>
           </FadeIn>
         ))}

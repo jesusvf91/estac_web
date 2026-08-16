@@ -1,4 +1,5 @@
 import { FadeIn } from "@/components/ui/FadeIn";
+import { Button } from "@/components/ui/Button";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
@@ -6,40 +7,34 @@ const audiences = [
   {
     title: "Empresas con un desafío técnico",
     description:
-      "Negocios y organizaciones que necesitan resolver un problema concreto de software, arquitectura, integración o modernización.",
+      "Cuando necesitan resolver un proyecto concreto sin crear un equipo completo.",
+    featured: false,
   },
   {
-    title: "Áreas de tecnología",
+    title: "Equipos de tecnología",
     description:
-      "Equipos de TI y líderes técnicos que buscan capacidad especializada para ejecutar, modernizar o integrar.",
+      "Cuando necesitan capacidad especializada en arquitectura o desarrollo.",
+    featured: false,
   },
   {
-    title: "Equipos de desarrollo",
+    title: "Empresas con sistemas legacy",
     description:
-      "Refuerzo técnico cuando tu equipo interno necesita acelerar una iniciativa o cubrir una especialidad puntual.",
+      "Cuando necesitan modernizar sin detener la operación.",
+    featured: false,
   },
   {
-    title: "Sistemas legacy",
+    title: "Empresas que quieren incorporar IA",
     description:
-      "Aplicaciones heredadas que necesitan evolucionar con control, sin reescrituras innecesarias.",
+      "Cuando necesitan pasar de la experimentación a una solución real.",
+    featured: false,
   },
   {
-    title: "Adopción de IA",
+    title: "Consultoras y partners tecnológicos",
     description:
-      "Organizaciones que quieren incorporar IA a procesos reales, no solo experimentar con demos aisladas.",
-  },
-  {
-    title: "Consultoras y partners",
-    description:
-      "Empresas tecnológicas que necesitan un partner técnico especializado para entregar con mayor profundidad.",
+      "Cuando necesitan capacidad técnica adicional para proyectos de sus clientes.",
+    featured: true,
   },
 ] as const;
-
-const credentials = [
-  "+10 años en desarrollo y arquitectura de software",
-  "Experiencia en sectores de alta exigencia: finanzas, seguros y telecomunicaciones",
-  "Liderazgo técnico, cloud y formación de equipos",
-];
 
 export function Cases() {
   return (
@@ -53,28 +48,24 @@ export function Cases() {
               title="Un partner técnico cuando tu equipo lo necesita."
               description="Estac puede entrar, entender un problema técnico o de negocio, diseñar una solución y construirla. Trabajamos como extensión de tu equipo o como partner de otras empresas tecnológicas."
             />
-
-            <ul className="mt-8 space-y-4">
-              {credentials.map((item) => (
-                <li
-                  key={item}
-                  className="flex items-start gap-3 text-sm leading-relaxed text-foreground/85"
-                >
-                  <span
-                    className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-teal"
-                    aria-hidden
-                  />
-                  {item}
-                </li>
-              ))}
-            </ul>
           </div>
         </FadeIn>
 
         <div>
           {audiences.map((item, index) => (
             <FadeIn key={item.title} delay={index * 0.04}>
-              <article className="group border-t border-border py-6 transition-colors duration-300 hover:border-brand/40">
+              <article
+                className={`group border-t border-border py-6 transition-colors duration-300 hover:border-brand/40 ${
+                  item.featured
+                    ? "border-brand/30 bg-brand/[0.03] px-4 sm:px-5"
+                    : ""
+                }`}
+              >
+                {item.featured ? (
+                  <p className="mb-2 text-xs font-semibold tracking-[0.14em] text-teal uppercase">
+                    Partnership
+                  </p>
+                ) : null}
                 <h3 className="font-display text-lg font-semibold tracking-tight text-foreground transition-colors duration-300 group-hover:text-brand">
                   {item.title}
                 </h3>
@@ -86,6 +77,33 @@ export function Cases() {
           ))}
         </div>
       </div>
+
+      <FadeIn delay={0.1}>
+        <div
+          id="partners"
+          className="mt-16 border-y border-border py-12 text-center sm:py-14"
+        >
+          <p className="text-xs font-semibold tracking-[0.16em] text-teal uppercase">
+            Partner tecnológico
+          </p>
+          <h3 className="mx-auto mt-4 max-w-3xl font-display text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
+            ¿Ya tienes el cliente pero necesitas capacidad técnica?
+          </h3>
+          <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-muted sm:text-base">
+            Trabajamos como partner tecnológico para consultoras, integradores
+            y empresas de servicios que necesitan ampliar temporalmente sus
+            capacidades de arquitectura o desarrollo.
+          </p>
+          <p className="mt-6 text-sm font-medium tracking-wide text-foreground">
+            Arquitectura · Desarrollo · IA · Integración · Modernización
+          </p>
+          <div className="mt-8">
+            <Button href="#contacto" size="lg">
+              Hablemos de un proyecto
+            </Button>
+          </div>
+        </div>
+      </FadeIn>
     </Section>
   );
 }

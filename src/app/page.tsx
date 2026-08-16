@@ -2,11 +2,13 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Hero } from "@/components/sections/Hero";
 import { Services } from "@/components/sections/Services";
+import { Credibility } from "@/components/sections/Credibility";
 import { Problems } from "@/components/sections/Problems";
-import { AIMultiplier } from "@/components/sections/AIMultiplier";
 import { Process } from "@/components/sections/Process";
+import { AIMultiplier } from "@/components/sections/AIMultiplier";
 import { Technologies } from "@/components/sections/Technologies";
 import { Cases } from "@/components/sections/Cases";
+import { About } from "@/components/sections/About";
 import { StartPaths } from "@/components/sections/StartPaths";
 import { CTA } from "@/components/sections/CTA";
 import { site } from "@/lib/site";
@@ -21,17 +23,23 @@ export default function Home() {
     email: site.email,
     telephone: site.phoneDisplay,
     areaServed: "CL",
+    founder: {
+      "@type": "Person",
+      name: site.founder.name,
+      jobTitle: site.founder.role,
+      sameAs: [site.founder.linkedin],
+    },
     knowsAbout: [
       "Desarrollo de software",
       "Arquitectura de software",
       "Desarrollo de software empresarial",
       "Modernización de sistemas",
-      "Microservicios",
       "Integración de sistemas",
       "Cloud",
       "Inteligencia artificial aplicada",
       "Automatización de procesos",
       "Consultoría de arquitectura de software",
+      "Technical Discovery",
     ],
   };
 
@@ -51,11 +59,13 @@ export default function Home() {
       <main id="contenido" className="flex-1">
         <Hero />
         <Services />
+        <Credibility />
         <Problems />
-        <AIMultiplier />
         <Process />
+        <AIMultiplier />
         <Technologies />
         <Cases />
+        <About />
         <StartPaths />
         <CTA />
       </main>

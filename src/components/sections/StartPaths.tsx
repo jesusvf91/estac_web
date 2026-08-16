@@ -15,15 +15,15 @@ export function StartPaths() {
           </h2>
           <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-muted sm:text-lg">
             Preferimos hablar de problemas reales antes que mostrar métricas
-            inventadas. Cuéntanos qué necesitas resolver: modernización,
-            integración, automatización, arquitectura o una primera prueba con IA.
+            inventadas. Podemos comenzar con un Technical Discovery o directamente
+            con el desafío que ya tienes identificado.
           </p>
           <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Button href="#contacto" size="lg">
-              Cuéntanos tu desafío
+              Cuéntanos qué necesitas
             </Button>
-            <Button href="#capacidades" variant="secondary" size="lg">
-              Ver qué hacemos
+            <Button href="#discovery" variant="secondary" size="lg">
+              Conocer Technical Discovery
             </Button>
           </div>
         </div>
