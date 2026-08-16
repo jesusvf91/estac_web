@@ -29,10 +29,17 @@ export function Process() {
         />
       </FadeIn>
 
-      <ol className="mt-14 grid gap-x-8 sm:grid-cols-2 lg:grid-cols-5">
+      <p className="mt-8 text-xs font-semibold tracking-[0.12em] text-muted uppercase sm:hidden">
+        Desliza para ver el proceso →
+      </p>
+      <ol className="mobile-scroll mt-4 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 sm:mt-14 sm:grid sm:grid-cols-2 sm:gap-x-8 sm:overflow-visible sm:pb-0 lg:grid-cols-5">
         {growthPath.map((step, index) => (
-          <FadeIn key={step.title} delay={index * 0.05}>
-            <li className="border-t-2 border-border pt-5 pb-6 lg:pb-0">
+          <FadeIn
+            key={step.title}
+            delay={index * 0.05}
+            className="w-[78%] shrink-0 snap-start sm:w-auto"
+          >
+            <li className="h-full border-t-2 border-border bg-white/70 px-5 pt-5 pb-5 sm:bg-transparent sm:px-0 sm:pb-6 lg:pb-0">
               <span className="font-display text-xs font-semibold text-teal tabular-nums">
                 {String(index + 1).padStart(2, "0")}
               </span>
@@ -50,7 +57,7 @@ export function Process() {
       <FadeIn delay={0.1}>
         <div
           id="discovery"
-          className="mt-16 grid gap-10 border-t border-border pt-12 lg:grid-cols-[0.95fr_1.05fr] lg:gap-16"
+          className="-mx-5 mt-12 grid gap-8 border-y border-border bg-white/50 px-5 py-10 sm:mx-0 sm:mt-16 sm:gap-10 sm:border-t sm:border-b-0 sm:bg-transparent sm:px-0 sm:pt-12 sm:pb-0 lg:grid-cols-[0.95fr_1.05fr] lg:gap-16"
         >
           <div>
             <p className="eyebrow text-teal">Oferta de entrada</p>
@@ -63,21 +70,26 @@ export function Process() {
               implementación defendible.
             </p>
             <div className="mt-7">
-              <Button href="#contacto" size="lg">
+              <Button
+                href="#contacto"
+                size="lg"
+                className="w-full sm:w-auto"
+              >
                 Solicitar Technical Discovery
               </Button>
             </div>
           </div>
 
-          <ul className="grid gap-x-8 sm:grid-cols-2">
+          <ul className="grid grid-cols-2 gap-x-4 sm:gap-x-8">
             {discoverySteps.map((step) => (
               <li
                 key={step.title}
-                className="border-t border-border py-5 first:border-t-0 sm:[&:nth-child(-n+2)]:border-t-0"
-              >                <h4 className="font-display text-base font-semibold text-foreground">
+                className="border-t border-border py-5 [&:nth-child(-n+2)]:border-t-0"
+              >
+                <h4 className="font-display text-sm font-semibold text-foreground sm:text-base">
                   {step.title}
                 </h4>
-                <p className="mt-1.5 text-sm leading-relaxed text-muted">
+                <p className="mt-1.5 text-xs leading-relaxed text-muted sm:text-sm">
                   {step.description}
                 </p>
               </li>

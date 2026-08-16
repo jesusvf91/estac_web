@@ -14,7 +14,7 @@ export function ProblemTicker() {
     <section
       id="problemas"
       aria-labelledby="problemas-titulo"
-      className="border-y border-border bg-white/50 py-8 sm:py-10"
+      className="border-y border-border bg-white/50 py-7 sm:py-10"
     >
       <Container>
         <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start lg:gap-14">
@@ -33,10 +33,12 @@ export function ProblemTicker() {
           </div>
 
           <ul className="grid gap-x-8 sm:grid-cols-2">
-            {problems.map((problem) => (
+            {problems.map((problem, index) => (
               <li
                 key={problem}
-                className="border-t border-border py-4 font-display text-sm font-medium leading-snug tracking-tight text-foreground/80 first:border-t-0 sm:text-[0.95rem] sm:[&:nth-child(-n+2)]:border-t-0"
+                className={`border-t border-border py-4 font-display text-sm font-medium leading-snug tracking-tight text-foreground/80 first:border-t-0 sm:block sm:text-[0.95rem] sm:[&:nth-child(-n+2)]:border-t-0 ${
+                  index >= 4 ? "hidden" : ""
+                }`}
               >
                 <span className="flex gap-3">
                   <span

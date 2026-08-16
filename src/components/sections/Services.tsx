@@ -56,20 +56,23 @@ export function Services() {
         />
       </FadeIn>
 
-      <ul className="mt-14">
+      <ul className="mt-10 sm:mt-14">
         {capabilities.map((item, index) => (
           <FadeIn key={item.title} delay={index * 0.04}>
             <li className="group border-t border-border transition-colors duration-300 hover:border-brand">
-              <div className="grid items-start gap-4 py-7 lg:grid-cols-[0.75fr_1fr_1fr] lg:gap-10">
-                <h3 className="display-row font-display font-semibold text-foreground transition-transform duration-300 group-hover:text-brand sm:group-hover:translate-x-1">
+              <div className="grid items-start gap-3 py-5 sm:gap-4 sm:py-7 lg:grid-cols-[0.75fr_1fr_1fr] lg:gap-10">
+                <h3 className="display-row flex items-baseline gap-3 font-display font-semibold text-foreground transition-transform duration-300 group-hover:text-brand sm:block sm:group-hover:translate-x-1">
+                  <span className="text-[0.65rem] font-semibold text-teal tabular-nums sm:hidden">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
                   {item.title}
                 </h3>
                 <div className="text-sm leading-relaxed sm:text-base">
-                  <p className="eyebrow mb-2 text-muted">El desafío</p>
+                  <p className="eyebrow mb-1.5 text-muted sm:mb-2">El desafío</p>
                   <p className="text-muted">{item.problem}</p>
                 </div>
                 <div className="text-sm leading-relaxed sm:text-base">
-                  <p className="eyebrow mb-2 text-teal">El resultado</p>
+                  <p className="eyebrow mb-1.5 text-teal sm:mb-2">El resultado</p>
                   <p className="font-medium text-foreground">{item.result}</p>
                 </div>
               </div>
@@ -79,7 +82,7 @@ export function Services() {
       </ul>
 
       <FadeIn delay={0.08}>
-        <div className="mt-14 grid gap-8 border-t border-border pt-8 lg:grid-cols-[1fr_auto] lg:items-end">
+        <div className="mt-10 grid gap-8 border-t border-border pt-8 sm:mt-14 lg:grid-cols-[1fr_auto] lg:items-end">
           <div>
             <p className="font-display text-xl font-semibold tracking-tight text-foreground">
               ¿No sabes qué solución necesitas?
@@ -89,7 +92,9 @@ export function Services() {
               entender el problema y definir el siguiente paso.
             </p>
             <div className="mt-5">
-              <Button href="#contacto">Cuéntanos el problema</Button>
+              <Button href="#contacto" className="w-full sm:w-auto">
+                Cuéntanos el problema
+              </Button>
             </div>
           </div>
           <div id="tecnologias">

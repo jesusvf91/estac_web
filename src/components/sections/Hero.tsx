@@ -13,7 +13,7 @@ export function Hero() {
   return (
     <section
       id="inicio"
-      className="relative overflow-hidden pt-28 pb-12 sm:pt-32 sm:pb-14 lg:pt-36"
+      className="relative overflow-hidden pt-24 pb-10 sm:pt-32 sm:pb-14 lg:pt-36"
     >
       <div className="pointer-events-none absolute inset-0 grid-pattern" aria-hidden />
       <div
@@ -30,12 +30,12 @@ export function Hero() {
           <EsWordplay />
         </motion.div>
 
-        <div className="mx-auto max-w-4xl text-center">
+        <div className="mx-auto max-w-4xl text-left sm:text-center">
           <motion.h1
             initial={reduceMotion ? false : { opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
-            className="display-hero mt-12 font-display font-semibold text-foreground sm:mt-14"
+            className="display-hero mt-9 font-display font-semibold text-foreground sm:mt-14"
           >
             Software para resolver{" "}
             <span className="text-brand">problemas tecnológicos reales.</span>
@@ -45,7 +45,7 @@ export function Hero() {
             initial={reduceMotion ? false : { opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55, delay: 0.16, ease: [0.22, 1, 0.36, 1] }}
-            className="mx-auto mt-7 max-w-xl text-base leading-relaxed text-muted sm:text-lg"
+            className="mt-5 max-w-xl text-base leading-relaxed text-muted sm:mx-auto sm:mt-7 sm:text-lg"
           >
             Entendemos el desafío, diseñamos una arquitectura viable y
             construimos una solución lista para evolucionar. La IA acelera el
@@ -56,13 +56,18 @@ export function Hero() {
             initial={reduceMotion ? false : { opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55, delay: 0.24, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row"
+            className="mt-7 flex flex-col items-stretch justify-center gap-3 sm:mt-9 sm:flex-row sm:items-center"
           >
-            <Button href="#discovery" size="lg">
+            <Button href="#discovery" size="lg" className="w-full sm:w-auto">
               Empezar con un Discovery
               <ArrowIcon />
             </Button>
-            <Button href="#contacto" variant="secondary" size="lg">
+            <Button
+              href="#contacto"
+              variant="secondary"
+              size="lg"
+              className="w-full sm:w-auto"
+            >
               Cuéntanos tu desafío
             </Button>
           </motion.div>
@@ -72,9 +77,9 @@ export function Hero() {
           initial={reduceMotion ? false : { opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.32, ease: [0.22, 1, 0.36, 1] }}
-          className="mt-16 border-t border-border pt-6 sm:mt-20"
+          className="mt-12 border-t border-border pt-5 sm:mt-20 sm:pt-6"
         >
-          <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between sm:gap-6">
             <ol className="flex flex-wrap items-baseline gap-x-3 gap-y-2 sm:gap-x-4">
               {flow.map((step, index) => (
                 <li key={step} className="flex items-baseline gap-3 sm:gap-4">

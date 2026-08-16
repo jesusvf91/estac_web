@@ -28,12 +28,12 @@ export function EsWordplay() {
   const current = words[index];
 
   return (
-    <div className="relative mx-auto w-full max-w-4xl text-center">
+    <div className="relative mx-auto w-full max-w-4xl text-left sm:text-center">
       <p className="sr-only">
         Estac: estrategia, estructura y escalabilidad para software que resuelve.
       </p>
       <div
-        className="relative flex min-h-[1.2em] items-center justify-center font-display text-[2.15rem] font-semibold tracking-tight uppercase sm:text-5xl lg:text-6xl"
+        className="relative flex min-h-[1.2em] items-center justify-start font-display text-[2rem] font-semibold tracking-tight uppercase sm:justify-center sm:text-5xl lg:text-6xl"
         aria-hidden
       >
         <span className="inline-flex items-baseline justify-center">
@@ -57,7 +57,7 @@ export function EsWordplay() {
       </div>
 
       <div
-        className="relative mt-4 flex h-8 items-center justify-center sm:mt-5 sm:h-9"
+        className="relative mt-3 flex h-8 items-center justify-start sm:mt-5 sm:h-9 sm:justify-center"
         aria-hidden
       >
         <AnimatePresence mode="wait" initial={false}>
@@ -67,7 +67,7 @@ export function EsWordplay() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -6 }}
             transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-            className="absolute max-w-[22rem] transform-gpu px-4 text-center text-[0.72rem] font-semibold leading-snug tracking-[0.12em] text-muted uppercase sm:max-w-none sm:text-xs sm:tracking-[0.15em]"
+            className="absolute max-w-[20rem] transform-gpu text-left text-[0.68rem] font-semibold leading-snug tracking-[0.1em] text-muted uppercase sm:max-w-none sm:px-4 sm:text-center sm:text-xs sm:tracking-[0.15em]"
           >
             <span className="text-brand">{current.full}</span>
             {" — "}
@@ -79,7 +79,7 @@ export function EsWordplay() {
       <div
         role="group"
         aria-label="Conceptos de Estac"
-        className="mt-5 flex items-center justify-center gap-2"
+        className="mt-4 flex items-center justify-start gap-2 sm:mt-5 sm:justify-center"
       >
         {words.map((word, i) => (
           <button
