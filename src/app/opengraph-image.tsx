@@ -1,5 +1,8 @@
 import { ImageResponse } from "next/og";
 
+export const dynamic = "force-static";
+export const revalidate = false;
+
 export const alt =
   "Estac — Software que resuelve. Arquitectura que escala. IA que acelera.";
 export const size = { width: 1200, height: 630 };

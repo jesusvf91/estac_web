@@ -1,7 +1,7 @@
 /** Datos de contacto y marca de Estac */
 export const site = {
   name: "Estac",
-  url: "https://estac.com",
+  url: "https://jesusvf91.github.io/estac_web",
   email: "hola@estac.com",
   phoneDisplay: "+56 9 0000 0000",
   /** Número internacional sin + ni espacios, para wa.me */
