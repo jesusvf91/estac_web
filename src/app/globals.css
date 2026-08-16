@@ -2,25 +2,104 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --background-subtle: #f4f8fa;
+  --foreground: #072633;
+  --muted: #46606d;
+  --border: #cddce4;
+  --brand: #094054;
+  --blue: #0d6b86;
+  --blue-soft: #1a849e;
+  --blue-deep: #094054;
+  --teal: #0f8f86;
+  --teal-soft: #14b8a6;
+  --teal-light: #d8f5f1;
+  --blue-light: #d7eef5;
 }
 
 @theme inline {
   --color-background: var(--background);
+  --color-background-subtle: var(--background-subtle);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-brand: var(--brand);
+  --color-blue: var(--blue);
+  --color-blue-soft: var(--blue-soft);
+  --color-blue-deep: var(--blue-deep);
+  --color-teal: var(--teal);
+  --color-teal-soft: var(--teal-soft);
+  --color-teal-light: var(--teal-light);
+  --color-blue-light: var(--blue-light);
+  --font-sans: var(--font-jakarta);
+  --font-display: var(--font-sora);
+  --font-logo: var(--font-exo2);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
+  background-color: #f7fafb;
+}
+
+[id] {
+  scroll-margin-top: 5rem;
 }
 
 body {
-  background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--blue) 22%, white);
+  color: var(--foreground);
+}
+
+.page-atmosphere {
+  background-color: #f7fafb;
+  background-image:
+    radial-gradient(ellipse 90% 55% at 12% 0%, rgba(9, 64, 84, 0.08), transparent 58%),
+    radial-gradient(ellipse 75% 45% at 92% 8%, rgba(15, 143, 134, 0.07), transparent 52%),
+    radial-gradient(ellipse 55% 40% at 75% 48%, rgba(13, 107, 134, 0.04), transparent 60%),
+    radial-gradient(ellipse 50% 35% at 18% 82%, rgba(15, 143, 134, 0.045), transparent 55%);
+}
+
+.gradient-mesh {
+  background: transparent;
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, var(--brand) 0%, var(--blue) 50%, var(--teal) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.grid-pattern {
+  background-image:
+    linear-gradient(to right, rgba(9, 64, 84, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(9, 64, 84, 0.05) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black 20%, transparent 75%);
+}
+
+/* Soft rounded feel cercano al wordmark (extended + soft) */
+.wordplay-mark {
+  font-stretch: expanded;
+  font-feature-settings: "ss01" 0;
+  text-rendering: geometricPrecision;
+  -webkit-font-smoothing: antialiased;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

@@ -1,0 +1,167 @@
+"use client";
+
+import { motion, useReducedMotion } from "framer-motion";
+import { Button } from "@/components/ui/Button";
+import { Container } from "@/components/ui/Container";
+import { EsWordplay } from "@/components/sections/EsWordplay";
+
+const flow = [
+  {
+    label: "Problema",
+    detail: "Legacy, procesos manuales, sistemas aislados",
+  },
+  {
+    label: "Arquitectura",
+    detail: "Diseño técnico, integración, cloud",
+  },
+  {
+    label: "Solución",
+    detail: "Software funcionando, listo para evolucionar",
+  },
+] as const;
+
+export function Hero() {
+  const reduceMotion = useReducedMotion();
+
+  return (
+    <section
+      id="inicio"
+      className="relative overflow-hidden pt-28 pb-14 sm:pt-32 sm:pb-16 lg:pt-36 lg:pb-20"
+    >
+      <div className="pointer-events-none absolute inset-0 grid-pattern" aria-hidden />
+
+      <Container className="relative">
+        <div className="mx-auto max-w-4xl text-center">
+          <motion.div
+            initial={reduceMotion ? false : { opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+            className="opacity-90"
+          >
+            <EsWordplay />
+          </motion.div>
+
+          <motion.h1
+            initial={reduceMotion ? false : { opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
+            className="mx-auto mt-8 max-w-4xl font-display text-3xl font-semibold tracking-tight text-foreground sm:mt-10 sm:text-4xl lg:text-5xl lg:leading-[1.12]"
+          >
+            Software que resuelve.{" "}
+            <span className="text-brand">Arquitectura que escala.</span>{" "}
+            <span className="gradient-text">IA que acelera.</span>
+          </motion.h1>
+
+          <motion.p
+            initial={reduceMotion ? false : { opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, delay: 0.16, ease: [0.22, 1, 0.36, 1] }}
+            className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-muted sm:text-lg"
+          >
+            Ayudamos a empresas a convertir problemas tecnológicos concretos en
+            soluciones de software reales, combinando arquitectura, desarrollo e
+            inteligencia artificial.
+          </motion.p>
+
+          <motion.div
+            initial={reduceMotion ? false : { opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, delay: 0.24, ease: [0.22, 1, 0.36, 1] }}
+            className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row"
+          >
+            <Button href="#contacto" size="lg">
+              Cuéntanos tu desafío
+              <ArrowIcon />
+            </Button>
+            <Button href="#capacidades" variant="secondary" size="lg">
+              Conoce lo que hacemos
+            </Button>
+          </motion.div>
+        </div>
+
+        <motion.div
+          initial={reduceMotion ? false : { opacity: 0, y: 28 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.65, delay: 0.32, ease: [0.22, 1, 0.36, 1] }}
+          className="mx-auto mt-16 max-w-4xl sm:mt-20"
+        >
+          <div className="overflow-hidden rounded-2xl border border-border bg-white shadow-[0_40px_80px_-52px_rgba(7,38,51,0.55)]">
+            <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border bg-background-subtle px-6 py-4 sm:px-8">
+              <p className="font-display text-sm font-semibold tracking-tight text-foreground">
+                Cómo convertimos un problema en software
+              </p>
+              <p className="flex items-center gap-2 text-xs font-semibold tracking-[0.12em] text-teal uppercase">
+                <span className="h-1.5 w-1.5 rounded-full bg-teal" aria-hidden />
+                IA en todo el proceso
+              </p>
+            </div>
+
+            <div className="relative px-6 py-10 sm:px-10 sm:py-12">
+              <div
+                className="absolute top-[3.05rem] right-[22%] left-[22%] hidden h-px bg-gradient-to-r from-blue/50 via-brand/60 to-teal/50 sm:block"
+                aria-hidden
+              />
+
+              <ol className="relative grid gap-10 text-center sm:grid-cols-3 sm:gap-6">
+                {flow.map((item, index) => (
+                  <li key={item.label} className="flex flex-col items-center">
+                    <span
+                      className={`h-3 w-3 rounded-full ring-4 ring-white ${
+                        index === 1 ? "bg-brand" : "bg-teal"
+                      }`}
+                      aria-hidden
+                    />
+                    <p className="mt-5 font-display text-lg font-semibold tracking-tight text-foreground">
+                      {item.label}
+                    </p>
+                    <p className="mt-2 max-w-[15rem] text-sm leading-relaxed text-muted">
+                      {item.detail}
+                    </p>
+                  </li>
+                ))}
+              </ol>
+            </div>
+
+            <div className="grid gap-px border-t border-border bg-border sm:grid-cols-3">
+              {[
+                { label: "Entrada", value: "Un problema concreto" },
+                { label: "Salida", value: "Software funcionando" },
+                { label: "Después", value: "Evoluciona contigo" },
+              ].map((item) => (
+                <div key={item.label} className="bg-white px-6 py-5 sm:px-8">
+                  <p className="text-xs font-semibold tracking-[0.12em] text-muted uppercase">
+                    {item.label}
+                  </p>
+                  <p className="mt-1.5 font-display text-base font-semibold text-foreground">
+                    {item.value}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </motion.div>
+      </Container>
+    </section>
+  );
+}
+
+function ArrowIcon() {
+  return (
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
+      fill="none"
+      aria-hidden
+      className="translate-y-px"
+    >
+      <path
+        d="M3.5 8h9M8.5 4l4 4-4 4"
+        stroke="currentColor"
+        strokeWidth="1.75"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
