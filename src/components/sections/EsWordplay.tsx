@@ -22,27 +22,24 @@ const INTERVAL_MS = 3400;
 
 const wordVariants: Variants = {
   enter: {
-    transition: { staggerChildren: 0.038, delayChildren: 0.04 },
+    transition: { staggerChildren: 0.03, delayChildren: 0.03 },
   },
   exit: {
-    transition: { staggerChildren: 0.028, staggerDirection: -1 },
+    transition: { staggerChildren: 0.02, staggerDirection: -1 },
   },
 };
 
 const letterVariants: Variants = {
-  initial: {
-    y: "85%",
-    opacity: 0,
-  },
+  initial: { y: "80%", opacity: 0 },
   enter: {
     y: "0%",
     opacity: 1,
-    transition: { duration: 0.32, ease: [0.22, 1, 0.36, 1] },
+    transition: { duration: 0.3, ease: [0.22, 1, 0.36, 1] },
   },
   exit: {
-    y: "-85%",
+    y: "-80%",
     opacity: 0,
-    transition: { duration: 0.22, ease: [0.4, 0, 1, 1] },
+    transition: { duration: 0.2, ease: [0.4, 0, 1, 1] },
   },
 };
 
@@ -68,22 +65,11 @@ export function EsWordplay() {
       aria-label="Estac: software para problemas reales"
     >
       <div
-        className="pointer-events-none absolute inset-x-10 -inset-y-4 rounded-full bg-gradient-to-r from-brand/10 via-teal/15 to-blue/10 blur-3xl sm:inset-x-20"
-        aria-hidden
-      />
-
-      <div
-        className="relative flex min-h-[1.2em] items-center justify-center overflow-x-clip font-display text-[2.15rem] font-semibold tracking-tight uppercase sm:text-5xl lg:text-6xl"
+        className="relative flex min-h-[1.2em] items-center justify-center font-display text-[2.15rem] font-semibold tracking-tight uppercase sm:text-5xl lg:text-6xl"
         aria-hidden
       >
-        <motion.div
-          layout
-          transition={{ layout: { duration: 0.4, ease: [0.22, 1, 0.36, 1] } }}
-          className="inline-flex items-baseline justify-center"
-        >
-          <motion.span layout className="gradient-text shrink-0 select-none">
-            ES
-          </motion.span>
+        <span className="inline-flex items-baseline justify-center">
+          <span className="shrink-0 text-brand select-none">ES</span>
 
           <span className="relative inline-flex overflow-hidden">
             <AnimatePresence mode="wait" initial={false}>
@@ -99,7 +85,7 @@ export function EsWordplay() {
                   <motion.span
                     key={`${current.suffix}-${i}`}
                     variants={letterVariants}
-                    className="inline-block text-foreground"
+                    className="inline-block transform-gpu text-foreground"
                   >
                     {letter}
                   </motion.span>
@@ -107,7 +93,7 @@ export function EsWordplay() {
               </motion.span>
             </AnimatePresence>
           </span>
-        </motion.div>
+        </span>
       </div>
 
       <div
@@ -120,8 +106,8 @@ export function EsWordplay() {
             initial={{ opacity: 0, y: 6 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -6 }}
-            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            className="absolute max-w-[22rem] px-4 text-center text-[0.7rem] font-semibold leading-snug tracking-[0.14em] text-muted uppercase sm:max-w-none sm:text-xs sm:tracking-[0.16em]"
+            transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+            className="absolute max-w-[22rem] transform-gpu px-4 text-center text-[0.7rem] font-semibold leading-snug tracking-[0.14em] text-muted uppercase sm:max-w-none sm:text-xs sm:tracking-[0.16em]"
           >
             <span className="text-brand">{current.full}</span>
             {" — "}
@@ -137,15 +123,15 @@ export function EsWordplay() {
             type="button"
             aria-label={word.full}
             onClick={() => setIndex(i)}
-            className="relative h-1.5 overflow-hidden rounded-full bg-border/80 transition-all"
+            className="relative h-1.5 overflow-hidden rounded-full bg-border transition-[width] duration-300"
             style={{ width: i === index ? 28 : 8 }}
           >
             {i === index ? (
               <motion.span
                 key={`bar-${index}`}
-                className="absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-brand to-teal"
-                initial={{ width: "0%" }}
-                animate={{ width: "100%" }}
+                className="absolute inset-y-0 left-0 w-full origin-left transform-gpu rounded-full bg-brand"
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: 1 }}
                 transition={{
                   duration: reduceMotion ? 0 : INTERVAL_MS / 1000,
                   ease: "linear",

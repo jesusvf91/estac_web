@@ -32,7 +32,6 @@
   --color-blue-light: var(--blue-light);
   --font-sans: var(--font-jakarta);
   --font-display: var(--font-sora);
-  --font-logo: var(--font-exo2);
 }
 
 html {
@@ -63,15 +62,14 @@ body {
     radial-gradient(ellipse 50% 35% at 18% 82%, rgba(15, 143, 134, 0.045), transparent 55%);
 }
 
-.gradient-mesh {
-  background: transparent;
-}
-
 .gradient-text {
   background: linear-gradient(135deg, var(--brand) 0%, var(--blue) 50%, var(--teal) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  /* Evita capas obsoletas del texto recortado en Safari iOS */
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
 }
 
 .grid-pattern {
@@ -79,15 +77,8 @@ body {
     linear-gradient(to right, rgba(9, 64, 84, 0.05) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(9, 64, 84, 0.05) 1px, transparent 1px);
   background-size: 48px 48px;
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black 20%, transparent 75%);
   mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black 20%, transparent 75%);
-}
-
-/* Soft rounded feel cercano al wordmark (extended + soft) */
-.wordplay-mark {
-  font-stretch: expanded;
-  font-feature-settings: "ss01" 0;
-  text-rendering: geometricPrecision;
-  -webkit-font-smoothing: antialiased;
 }
 
 @media (prefers-reduced-motion: reduce) {

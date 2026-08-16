@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Exo_2, Plus_Jakarta_Sans, Sora } from "next/font/google";
+import { Plus_Jakarta_Sans, Sora } from "next/font/google";
 import { site } from "@/lib/site";
 import "./globals.css";
 
@@ -12,13 +12,6 @@ const jakarta = Plus_Jakarta_Sans({
 const sora = Sora({
   variable: "--font-sora",
   subsets: ["latin"],
-  display: "swap",
-});
-
-const exo2 = Exo_2({
-  variable: "--font-exo2",
-  subsets: ["latin"],
-  weight: ["600", "700", "800"],
   display: "swap",
 });
 
@@ -74,7 +67,7 @@ export default function RootLayout({
   return (
     <html
       lang="es"
-      className={`${jakarta.variable} ${sora.variable} ${exo2.variable} h-full antialiased`}
+      className={`${jakarta.variable} ${sora.variable} h-full antialiased`}
     >
       <body className="page-atmosphere min-h-full flex flex-col text-foreground font-sans">
         {children}
