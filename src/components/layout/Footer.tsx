@@ -4,8 +4,8 @@ import { site } from "@/lib/site";
 
 const footerLinks = [
   { href: "#capacidades", label: "Qué hacemos" },
-  { href: "#problemas", label: "Problemas" },
   { href: "#enfoque", label: "Cómo trabajamos" },
+  { href: "#discovery", label: "Discovery" },
   { href: "#ia", label: "IA" },
   { href: "#para-quien", label: "Para quién" },
   { href: "#nosotros", label: "Nosotros" },

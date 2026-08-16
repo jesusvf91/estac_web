@@ -14,6 +14,7 @@
   --teal-soft: #14b8a6;
   --teal-light: #d8f5f1;
   --blue-light: #d7eef5;
+  --ink: #04202b;
 }
 
 @theme inline {
@@ -30,6 +31,7 @@
   --color-teal-soft: var(--teal-soft);
   --color-teal-light: var(--teal-light);
   --color-blue-light: var(--blue-light);
+  --color-ink: var(--ink);
   --font-sans: var(--font-jakarta);
   --font-display: var(--font-sora);
 }
@@ -70,6 +72,60 @@ body {
   /* Evita capas obsoletas del texto recortado en Safari iOS */
   -webkit-transform: translateZ(0);
   transform: translateZ(0);
+}
+
+.display-hero {
+  font-size: clamp(2.35rem, 6.2vw, 4.5rem);
+  line-height: 0.99;
+  letter-spacing: -0.035em;
+}
+
+.display-section {
+  font-size: clamp(1.95rem, 4.6vw, 3.35rem);
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+}
+
+.display-row {
+  font-size: clamp(1.35rem, 2.6vw, 1.9rem);
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+}
+
+.eyebrow {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.grain::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.22;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.rule-guides {
+  background-image: linear-gradient(
+    to right,
+    transparent 0,
+    transparent calc(25% - 1px),
+    rgba(9, 64, 84, 0.07) calc(25% - 1px),
+    rgba(9, 64, 84, 0.07) 25%,
+    transparent 25%,
+    transparent calc(50% - 1px),
+    rgba(9, 64, 84, 0.07) calc(50% - 1px),
+    rgba(9, 64, 84, 0.07) 50%,
+    transparent 50%,
+    transparent calc(75% - 1px),
+    rgba(9, 64, 84, 0.07) calc(75% - 1px),
+    rgba(9, 64, 84, 0.07) 75%,
+    transparent 75%
+  );
 }
 
 .grid-pattern {

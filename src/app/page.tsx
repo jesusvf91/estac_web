@@ -1,15 +1,13 @@
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Hero } from "@/components/sections/Hero";
+import { ProblemTicker } from "@/components/sections/ProblemTicker";
+import { CommercialProof } from "@/components/sections/CommercialProof";
 import { Services } from "@/components/sections/Services";
-import { Credibility } from "@/components/sections/Credibility";
-import { Problems } from "@/components/sections/Problems";
 import { Process } from "@/components/sections/Process";
 import { AIMultiplier } from "@/components/sections/AIMultiplier";
-import { Technologies } from "@/components/sections/Technologies";
 import { Cases } from "@/components/sections/Cases";
 import { About } from "@/components/sections/About";
-import { StartPaths } from "@/components/sections/StartPaths";
 import { CTA } from "@/components/sections/CTA";
 import { site } from "@/lib/site";
 
@@ -21,7 +19,6 @@ export default function Home() {
     description: site.description,
     url: site.url,
     email: site.email,
-    telephone: site.phoneDisplay,
     areaServed: "CL",
     founder: {
       "@type": "Person",
@@ -58,15 +55,13 @@ export default function Home() {
       <Header />
       <main id="contenido" className="flex-1">
         <Hero />
+        <CommercialProof />
         <Services />
-        <Credibility />
-        <Problems />
+        <ProblemTicker />
         <Process />
         <AIMultiplier />
-        <Technologies />
         <Cases />
         <About />
-        <StartPaths />
         <CTA />
       </main>
       <Footer />

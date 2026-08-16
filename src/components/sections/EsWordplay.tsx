@@ -1,47 +1,16 @@
 "use client";
 
-import {
-  AnimatePresence,
-  motion,
-  type Variants,
-  useReducedMotion,
-} from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useEffect, useState } from "react";
 
 const words = [
   { suffix: "TAC", full: "ESTAC", hint: "TU PARTNER DIGITAL TÉCNICO" },
-  { suffix: "TRATEGIA", full: "ESTRATEGIA", hint: "DISEÑAMOS ANTES DE CONSTRUIR" },
   { suffix: "TRUCTURA", full: "ESTRUCTURA", hint: "ARQUITECTURA CLARA Y SOSTENIBLE" },
   { suffix: "CALABILIDAD", full: "ESCALABILIDAD", hint: "CRECE SIN REHACER TODO" },
-  { suffix: "TABILIDAD", full: "ESTABILIDAD", hint: "OPERACIÓN CONFIABLE, SIN SORPRESAS" },
-  { suffix: "PECIALIZACIÓN", full: "ESPECIALIZACIÓN", hint: "PROFUNDIDAD TÉCNICA, NO GENERALIDADES" },
-  { suffix: "TÁNDAR", full: "ESTÁNDAR", hint: "CALIDAD Y BUENAS PRÁCTICAS" },
+  { suffix: "TRATEGIA", full: "ESTRATEGIA", hint: "DISEÑAMOS ANTES DE CONSTRUIR" },
 ] as const;
 
-const INTERVAL_MS = 3400;
-
-const wordVariants: Variants = {
-  enter: {
-    transition: { staggerChildren: 0.03, delayChildren: 0.03 },
-  },
-  exit: {
-    transition: { staggerChildren: 0.02, staggerDirection: -1 },
-  },
-};
-
-const letterVariants: Variants = {
-  initial: { y: "80%", opacity: 0 },
-  enter: {
-    y: "0%",
-    opacity: 1,
-    transition: { duration: 0.3, ease: [0.22, 1, 0.36, 1] },
-  },
-  exit: {
-    y: "-80%",
-    opacity: 0,
-    transition: { duration: 0.2, ease: [0.4, 0, 1, 1] },
-  },
-};
+const INTERVAL_MS = 5200;
 
 export function EsWordplay() {
   const [index, setIndex] = useState(0);
@@ -57,13 +26,12 @@ export function EsWordplay() {
   }, [reduceMotion]);
 
   const current = words[index];
-  const letters = current.suffix.split("");
 
   return (
-    <div
-      className="relative mx-auto w-full max-w-4xl text-center"
-      aria-label="Estac: software para problemas reales"
-    >
+    <div className="relative mx-auto w-full max-w-4xl text-center">
+      <p className="sr-only">
+        Estac: estrategia, estructura y escalabilidad para software que resuelve.
+      </p>
       <div
         className="relative flex min-h-[1.2em] items-center justify-center font-display text-[2.15rem] font-semibold tracking-tight uppercase sm:text-5xl lg:text-6xl"
         aria-hidden
@@ -75,21 +43,13 @@ export function EsWordplay() {
             <AnimatePresence mode="wait" initial={false}>
               <motion.span
                 key={current.suffix}
-                className="inline-flex"
-                variants={wordVariants}
-                initial="initial"
-                animate="enter"
-                exit="exit"
+                className="inline-block transform-gpu text-foreground"
+                initial={reduceMotion ? false : { opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: -10 }}
+                transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
               >
-                {letters.map((letter, i) => (
-                  <motion.span
-                    key={`${current.suffix}-${i}`}
-                    variants={letterVariants}
-                    className="inline-block transform-gpu text-foreground"
-                  >
-                    {letter}
-                  </motion.span>
-                ))}
+                {current.suffix}
               </motion.span>
             </AnimatePresence>
           </span>
@@ -107,7 +67,7 @@ export function EsWordplay() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -6 }}
             transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-            className="absolute max-w-[22rem] transform-gpu px-4 text-center text-[0.7rem] font-semibold leading-snug tracking-[0.14em] text-muted uppercase sm:max-w-none sm:text-xs sm:tracking-[0.16em]"
+            className="absolute max-w-[22rem] transform-gpu px-4 text-center text-[0.72rem] font-semibold leading-snug tracking-[0.12em] text-muted uppercase sm:max-w-none sm:text-xs sm:tracking-[0.15em]"
           >
             <span className="text-brand">{current.full}</span>
             {" — "}
@@ -116,15 +76,20 @@ export function EsWordplay() {
         </AnimatePresence>
       </div>
 
-      <div className="mt-6 flex items-center justify-center gap-2">
+      <div
+        role="group"
+        aria-label="Conceptos de Estac"
+        className="mt-5 flex items-center justify-center gap-2"
+      >
         {words.map((word, i) => (
           <button
             key={word.suffix}
             type="button"
             aria-label={word.full}
             onClick={() => setIndex(i)}
-            className="relative h-1.5 overflow-hidden rounded-full bg-border transition-[width] duration-300"
-            style={{ width: i === index ? 28 : 8 }}
+            aria-current={i === index ? "true" : undefined}
+            className="relative h-1.5 overflow-hidden rounded-full bg-border transition-[width] duration-300 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand"
+            style={{ width: i === index ? 36 : 12 }}
           >
             {i === index ? (
               <motion.span

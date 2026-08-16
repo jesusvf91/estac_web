@@ -1,37 +1,31 @@
 import { FadeIn } from "@/components/ui/FadeIn";
-import { Button } from "@/components/ui/Button";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
 const audiences = [
   {
     title: "Empresas con un desafío técnico",
-    description:
-      "Cuando necesitan resolver un proyecto concreto sin crear un equipo completo.",
+    description: "Resolver un proyecto concreto sin crear un equipo completo.",
     featured: false,
   },
   {
     title: "Equipos de tecnología",
-    description:
-      "Cuando necesitan capacidad especializada en arquitectura o desarrollo.",
+    description: "Capacidad especializada en arquitectura o desarrollo.",
     featured: false,
   },
   {
     title: "Empresas con sistemas legacy",
-    description:
-      "Cuando necesitan modernizar sin detener la operación.",
+    description: "Modernizar sin detener la operación.",
     featured: false,
   },
   {
     title: "Empresas que quieren incorporar IA",
-    description:
-      "Cuando necesitan pasar de la experimentación a una solución real.",
+    description: "Pasar de la experimentación a una solución real.",
     featured: false,
   },
   {
-    title: "Consultoras y partners tecnológicos",
-    description:
-      "Cuando necesitan capacidad técnica adicional para proyectos de sus clientes.",
+    title: "Consultoras y partners",
+    description: "Ampliar capacidad técnica para proyectos de sus clientes.",
     featured: true,
   },
 ] as const;
@@ -39,71 +33,63 @@ const audiences = [
 export function Cases() {
   return (
     <Section id="para-quien">
-      <div className="grid gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:gap-16">
+      <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
         <FadeIn>
           <div className="lg:sticky lg:top-28">
             <SectionHeading
-              align="left"
               eyebrow="Para quién"
               title="Un partner técnico cuando tu equipo lo necesita."
-              description="Estac puede entrar, entender un problema técnico o de negocio, diseñar una solución y construirla. Trabajamos como extensión de tu equipo o como partner de otras empresas tecnológicas."
+              description="Entramos, entendemos el problema, diseñamos la solución y la construimos."
             />
           </div>
         </FadeIn>
 
-        <div>
+        <ul id="partners">
           {audiences.map((item, index) => (
             <FadeIn key={item.title} delay={index * 0.04}>
-              <article
-                className={`group border-t border-border py-6 transition-colors duration-300 hover:border-brand/40 ${
+              <li
+                className={`group transition-colors duration-300 ${
                   item.featured
-                    ? "border-brand/30 bg-brand/[0.03] px-4 sm:px-5"
-                    : ""
+                    ? "mt-6 rounded-2xl border border-brand bg-brand px-6 text-white shadow-[0_24px_60px_-42px_rgba(9,64,84,0.8)]"
+                    : "border-t border-border hover:border-brand"
                 }`}
               >
-                {item.featured ? (
-                  <p className="mb-2 text-xs font-semibold tracking-[0.14em] text-teal uppercase">
-                    Partnership
-                  </p>
-                ) : null}
-                <h3 className="font-display text-lg font-semibold tracking-tight text-foreground transition-colors duration-300 group-hover:text-brand">
-                  {item.title}
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted sm:text-[0.95rem]">
-                  {item.description}
-                </p>
-              </article>
+                <div className="grid items-baseline gap-x-10 gap-y-2 py-6 sm:grid-cols-[1.05fr_1fr]">
+                  <h3
+                    className={`font-display text-lg font-semibold tracking-tight transition-colors duration-300 sm:text-xl ${
+                      item.featured
+                        ? "text-white"
+                        : "text-foreground group-hover:text-brand"
+                    }`}
+                  >
+                    {item.title}
+                  </h3>
+                  <div>
+                    <p
+                      className={`text-sm leading-relaxed ${
+                        item.featured ? "text-white/75" : "text-muted"
+                      }`}
+                    >
+                      {item.description}
+                    </p>
+                    {item.featured ? (
+                      <p className="mt-3 text-sm leading-relaxed text-white/75">
+                        Partner tecnológico de consultoras e integradores.{" "}
+                        <a
+                          href="#contacto"
+                          className="font-semibold text-white underline decoration-white/40 underline-offset-4 transition-colors hover:decoration-white"
+                        >
+                          Hablemos de un proyecto
+                        </a>
+                      </p>
+                    ) : null}
+                  </div>
+                </div>
+              </li>
             </FadeIn>
           ))}
-        </div>
+        </ul>
       </div>
-
-      <FadeIn delay={0.1}>
-        <div
-          id="partners"
-          className="mt-16 border-y border-border py-12 text-center sm:py-14"
-        >
-          <p className="text-xs font-semibold tracking-[0.16em] text-teal uppercase">
-            Partner tecnológico
-          </p>
-          <h3 className="mx-auto mt-4 max-w-3xl font-display text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
-            ¿Ya tienes el cliente pero necesitas capacidad técnica?
-          </h3>
-          <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-muted sm:text-base">
-            Trabajamos como partner tecnológico para consultoras, integradores
-            y empresas de servicios que necesitan ampliar temporalmente sus
-            capacidades de arquitectura o desarrollo.
-          </p>
-          <p className="mt-6 text-sm font-medium tracking-wide text-foreground">
-            Arquitectura · Desarrollo · IA · Integración · Modernización
-          </p>
-          <div className="mt-8">
-            <Button href="#contacto" size="lg">
-              Hablemos de un proyecto
-            </Button>
-          </div>
-        </div>
-      </FadeIn>
     </Section>
   );
 }

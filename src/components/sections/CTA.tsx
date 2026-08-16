@@ -4,7 +4,7 @@ import { type FormEvent } from "react";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { Button } from "@/components/ui/Button";
 import { Section } from "@/components/ui/Section";
-import { contactLinks, site } from "@/lib/site";
+import { site } from "@/lib/site";
 
 export function CTA() {
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -41,52 +41,37 @@ export function CTA() {
         <div className="relative">
           <div className="relative grid gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-start lg:gap-16">
             <div>
-              <p className="text-xs font-semibold tracking-[0.18em] text-teal uppercase">
-                Contacto
-              </p>
-              <h2 className="mt-3 font-display text-3xl font-semibold tracking-tight text-foreground sm:text-4xl lg:text-[2.6rem] lg:leading-tight">
+              <div className="mb-6 flex items-center gap-4">
+                <span className="eyebrow text-muted">Contacto</span>
+                <span className="h-px flex-1 bg-border" aria-hidden />
+              </div>
+              <h2 className="display-section font-display font-semibold text-foreground">
                 ¿Tienes un problema tecnológico que resolver?
               </h2>
-              <p className="mt-4 max-w-xl text-base leading-relaxed text-muted sm:text-lg">
-                Cuéntanos qué necesitas. Podemos ayudarte a entender el problema,
-                definir una solución y construir una primera etapa.
+              <p className="mt-5 max-w-lg text-base leading-relaxed text-muted sm:text-lg">
+                No necesitas llegar con una solución definida. Cuéntanos el
+                problema y empezamos por entenderlo.
               </p>
 
-              <div className="mt-8 border-t border-border">
-                <ContactRow
-                  label="Email"
-                  value={site.email}
-                  href={contactLinks.email}
-                />
-                <ContactRow
-                  label="WhatsApp"
-                  value={site.phoneDisplay}
-                  href={contactLinks.whatsapp}
-                />
-              </div>
-
-              <ul className="mt-6 space-y-2.5 text-sm text-foreground/90">
+              <ul className="mt-8 space-y-3 text-sm leading-relaxed text-foreground/80">
                 {[
-                  "Empezamos con un problema concreto",
-                  "Diseñamos antes de construir",
-                  "IA para desarrollar mejor y más rápido",
+                  "Revisamos el contexto antes de proponer tecnología.",
+                  "Definimos un primer paso con alcance claro.",
+                  "Puedes comenzar con Discovery, PoC o un proyecto concreto.",
                 ].map((item) => (
-                  <li key={item} className="flex items-center gap-2.5">
-                    <span className="flex h-5 w-5 items-center justify-center rounded-full bg-teal-light text-teal">
-                      <CheckIcon />
-                    </span>
+                  <li key={item} className="flex gap-3">
+                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-teal" aria-hidden />
                     {item}
                   </li>
                 ))}
               </ul>
 
-              <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-                <Button href={contactLinks.email} size="lg">
-                  Cuéntanos qué necesitas
-                </Button>
-                <Button href="#enfoque" variant="secondary" size="lg">
-                  Conoce nuestro enfoque
-                </Button>
+              <div className="mt-9 border-t border-border">
+                <ContactRow
+                  label="Email"
+                  value={site.email}
+                  href={`mailto:${site.email}`}
+                />
               </div>
             </div>
 
@@ -108,7 +93,7 @@ export function CTA() {
                 <Field
                   id="role"
                   label="Rol"
-                  placeholder="CTO, Gerente de TI, Líder técnico..."
+                  placeholder="Tu rol en la empresa"
                 />
                 <div>
                   <label
@@ -212,19 +197,5 @@ function Field({
         className="w-full rounded-xl border border-border bg-white px-3.5 py-3 text-sm text-foreground outline-none transition focus:border-brand focus:ring-2 focus:ring-brand/20"
       />
     </div>
-  );
-}
-
-function CheckIcon() {
-  return (
-    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden>
-      <path
-        d="M3 7.2 5.8 10 11 4"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
   );
 }

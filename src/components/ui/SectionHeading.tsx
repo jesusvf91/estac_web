@@ -1,30 +1,53 @@
+import { type ReactNode } from "react";
+
 type SectionHeadingProps = {
   eyebrow?: string;
-  title: string;
+  title: ReactNode;
   description?: string;
   align?: "left" | "center";
+  tone?: "light" | "dark";
+  className?: string;
 };
 
 export function SectionHeading({
   eyebrow,
   title,
   description,
-  align = "center",
+  align = "left",
+  tone = "light",
+  className = "",
 }: SectionHeadingProps) {
+  const dark = tone === "dark";
   const alignment = align === "center" ? "mx-auto text-center" : "text-left";
 
   return (
-    <div className={`max-w-2xl ${alignment}`}>
+    <div className={`max-w-3xl ${alignment} ${className}`}>
       {eyebrow ? (
-        <p className="mb-3 text-xs font-semibold tracking-[0.18em] text-teal uppercase">
-          {eyebrow}
-        </p>
+        <div className="mb-6 flex items-center gap-4">
+          <span className={dark ? "eyebrow text-white/60" : "eyebrow text-muted"}>
+            {eyebrow}
+          </span>
+          <span
+            className={`h-px flex-1 ${dark ? "bg-white/20" : "bg-border"}`}
+            aria-hidden
+          />
+        </div>
       ) : null}
-      <h2 className="font-display text-3xl font-semibold tracking-tight text-foreground sm:text-4xl lg:text-[2.75rem] lg:leading-tight">
+
+      <h2
+        className={`display-section font-display font-semibold ${
+          dark ? "text-white" : "text-foreground"
+        }`}
+      >
         {title}
       </h2>
+
       {description ? (
-        <p className="mt-4 text-base leading-relaxed text-foreground/70 sm:text-lg">
+        <p
+          className={`mt-5 max-w-2xl text-base leading-relaxed sm:text-lg ${
+            align === "center" ? "mx-auto" : ""
+          } ${dark ? "text-white/70" : "text-foreground/70"}`}
+        >
           {description}
         </p>
       ) : null}

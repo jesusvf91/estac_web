@@ -1,44 +1,48 @@
 import { FadeIn } from "@/components/ui/FadeIn";
+import { Button } from "@/components/ui/Button";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
 const capabilities = [
   {
     title: "Desarrollo de software",
-    problem: "Necesitas una aplicación, API o sistema a medida para un objetivo concreto.",
-    action: "Diseñamos y construimos la solución con alcance claro y foco en entrega.",
-    result: "Software funcional, mantenible y alineado al negocio.",
+    problem: "Necesitas una aplicación, API o sistema para un objetivo concreto.",
+    result: "Software funcional, mantenible y listo para evolucionar.",
   },
   {
-    title: "Arquitectura de software",
-    problem: "Tu sistema necesita crecer, pero la arquitectura actual se vuelve una limitación.",
-    action: "Evaluamos el contexto y diseñamos una solución técnica preparada para evolucionar.",
-    result: "Arquitectura clara, mantenible y alineada a las necesidades reales.",
+    title: "Arquitectura",
+    problem: "Tu sistema debe crecer, pero la estructura actual lo limita.",
+    result: "Decisiones y un roadmap técnico antes de construir.",
   },
   {
     title: "Modernización",
-    problem: "Tienes aplicaciones o plataformas legacy que frenan la operación o el crecimiento.",
-    action: "Evolucionamos lo existente hacia patrones modernos sin reescrituras innecesarias.",
-    result: "Un camino controlado de modernización, sin detener el negocio.",
+    problem: "Una plataforma legacy frena la operación o el crecimiento.",
+    result: "Un camino de evolución controlado, sin reescribir por defecto.",
   },
   {
     title: "Integración",
-    problem: "Tus sistemas no se comunican o la información queda atrapada en silos.",
-    action: "Diseñamos APIs e integraciones adaptadas al entorno real de tu empresa.",
-    result: "Flujos de información confiables entre sistemas y equipos.",
+    problem: "Tus sistemas no se comunican y la información vive en silos.",
+    result: "APIs y flujos confiables entre sistemas y equipos.",
   },
   {
     title: "IA aplicada",
-    problem: "Quieres incorporar IA, pero sin demos aisladas ni promesas vacías.",
-    action: "Aplicamos IA donde aporta valor: automatización, asistentes, análisis e integración.",
-    result: "Una capacidad útil dentro de un proceso o producto real.",
+    problem: "Quieres incorporar IA más allá de una demostración aislada.",
+    result: "Automatización, asistentes o análisis dentro de procesos reales.",
   },
   {
     title: "Prototipos y PoC",
-    problem: "Tienes una idea o hipótesis que necesitas validar antes de invertir más.",
-    action: "Construimos una prueba funcional en un alcance acotado.",
-    result: "Evidencia para decidir con más seguridad el siguiente paso.",
+    problem: "Necesitas validar una idea antes de comprometer una inversión mayor.",
+    result: "Evidencia funcional para decidir el siguiente paso.",
   },
+] as const;
+
+const stacks = [
+  "Backend",
+  "Frontend",
+  "Cloud",
+  "IA",
+  "Arquitectura",
+  "Integración",
 ] as const;
 
 export function Services() {
@@ -47,45 +51,64 @@ export function Services() {
       <FadeIn>
         <SectionHeading
           eyebrow="Qué hacemos"
-          title="Entramos donde existe un problema tecnológico."
-          description="No todas las empresas necesitan comenzar con un gran proyecto. A veces el desafío es automatizar un proceso, integrar dos sistemas, modernizar una aplicación o validar una idea antes de invertir en ella."
+          title="Entramos donde hay un problema tecnológico."
+          description="No partimos de una tecnología. Entendemos qué está bloqueando al negocio y construimos el camino más directo hacia un resultado útil."
         />
       </FadeIn>
 
-      <div className="mt-12 grid gap-x-12 gap-y-2 sm:grid-cols-2 lg:grid-cols-3">
+      <ul className="mt-14">
         {capabilities.map((item, index) => (
-          <FadeIn key={item.title} delay={index * 0.05}>
-            <article className="group relative border-t-2 border-border py-7 transition-colors duration-300 hover:border-brand">
-              <span className="font-display text-xs font-semibold tracking-[0.16em] text-teal tabular-nums">
-                {String(index + 1).padStart(2, "0")}
-              </span>
-              <h3 className="mt-4 font-display text-xl font-semibold tracking-tight text-foreground">
-                {item.title}
-              </h3>
-              <dl className="mt-4 space-y-3 text-sm leading-relaxed">
-                <div>
-                  <dt className="text-xs font-semibold tracking-[0.12em] text-muted uppercase">
-                    Problema
-                  </dt>
-                  <dd className="mt-1 text-foreground/85">{item.problem}</dd>
+          <FadeIn key={item.title} delay={index * 0.04}>
+            <li className="group border-t border-border transition-colors duration-300 hover:border-brand">
+              <div className="grid items-start gap-4 py-7 lg:grid-cols-[0.75fr_1fr_1fr] lg:gap-10">
+                <h3 className="display-row font-display font-semibold text-foreground transition-transform duration-300 group-hover:text-brand sm:group-hover:translate-x-1">
+                  {item.title}
+                </h3>
+                <div className="text-sm leading-relaxed sm:text-base">
+                  <p className="eyebrow mb-2 text-muted">El desafío</p>
+                  <p className="text-muted">{item.problem}</p>
                 </div>
-                <div>
-                  <dt className="text-xs font-semibold tracking-[0.12em] text-muted uppercase">
-                    Qué hacemos
-                  </dt>
-                  <dd className="mt-1 text-foreground/85">{item.action}</dd>
+                <div className="text-sm leading-relaxed sm:text-base">
+                  <p className="eyebrow mb-2 text-teal">El resultado</p>
+                  <p className="font-medium text-foreground">{item.result}</p>
                 </div>
-                <div>
-                  <dt className="text-xs font-semibold tracking-[0.12em] text-teal uppercase">
-                    Resultado
-                  </dt>
-                  <dd className="mt-1 font-medium text-foreground">{item.result}</dd>
-                </div>
-              </dl>
-            </article>
+              </div>
+            </li>
           </FadeIn>
         ))}
-      </div>
+      </ul>
+
+      <FadeIn delay={0.08}>
+        <div className="mt-14 grid gap-8 border-t border-border pt-8 lg:grid-cols-[1fr_auto] lg:items-end">
+          <div>
+            <p className="font-display text-xl font-semibold tracking-tight text-foreground">
+              ¿No sabes qué solución necesitas?
+            </p>
+            <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted">
+              No hace falta llegar con el alcance resuelto. Empezamos por
+              entender el problema y definir el siguiente paso.
+            </p>
+            <div className="mt-5">
+              <Button href="#contacto">Cuéntanos el problema</Button>
+            </div>
+          </div>
+          <div id="tecnologias">
+            <ul className="flex flex-wrap items-center gap-x-3 gap-y-2">
+            {stacks.map((stack, index) => (
+              <li key={stack} className="flex items-center gap-3 text-xs font-semibold text-muted">
+                {stack}
+                {index < stacks.length - 1 ? (
+                  <span className="h-1 w-1 rounded-full bg-teal" aria-hidden />
+                ) : null}
+              </li>
+            ))}
+            </ul>
+            <p className="mt-3 text-sm text-muted">
+              El stack sigue al problema, no al revés.
+            </p>
+          </div>
+        </div>
+      </FadeIn>
     </Section>
   );
 }

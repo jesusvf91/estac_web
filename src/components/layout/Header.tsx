@@ -8,9 +8,10 @@ import { Logo } from "@/components/ui/Logo";
 
 const links = [
   { href: "#capacidades", label: "Qué hacemos" },
-  { href: "#problemas", label: "Problemas" },
   { href: "#enfoque", label: "Cómo trabajamos" },
+  { href: "#discovery", label: "Discovery" },
   { href: "#ia", label: "IA" },
+  { href: "#para-quien", label: "Para quién" },
   { href: "#nosotros", label: "Nosotros" },
 ];
 
