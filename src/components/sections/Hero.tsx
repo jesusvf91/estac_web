@@ -96,30 +96,32 @@ export function Hero() {
               </p>
             </div>
 
-            <div className="relative px-6 py-10 sm:px-10 sm:py-12">
-              <div
-                className="absolute top-[3.05rem] right-[22%] left-[22%] hidden h-px bg-gradient-to-r from-blue/50 via-brand/60 to-teal/50 sm:block"
-                aria-hidden
-              />
+            <div className="px-6 py-10 sm:px-10 sm:py-12">
+              <div className="relative">
+                <div
+                  className="absolute top-1.5 right-[16.67%] left-[16.67%] hidden h-px -translate-y-1/2 bg-gradient-to-r from-blue/50 via-brand/60 to-teal/50 sm:block"
+                  aria-hidden
+                />
 
-              <ol className="relative grid gap-10 text-center sm:grid-cols-3 sm:gap-6">
-                {flow.map((item, index) => (
-                  <li key={item.label} className="flex flex-col items-center">
-                    <span
-                      className={`h-3 w-3 rounded-full ring-4 ring-white ${
-                        index === 1 ? "bg-brand" : "bg-teal"
-                      }`}
-                      aria-hidden
-                    />
-                    <p className="mt-5 font-display text-lg font-semibold tracking-tight text-foreground">
-                      {item.label}
-                    </p>
-                    <p className="mt-2 max-w-[15rem] text-sm leading-relaxed text-muted">
-                      {item.detail}
-                    </p>
-                  </li>
-                ))}
-              </ol>
+                <ol className="relative grid gap-10 text-center sm:grid-cols-3 sm:gap-6">
+                  {flow.map((item, index) => (
+                    <li key={item.label} className="flex flex-col items-center">
+                      <span
+                        className={`h-3 w-3 rounded-full ring-4 ring-white ${
+                          index === 1 ? "bg-brand" : "bg-teal"
+                        }`}
+                        aria-hidden
+                      />
+                      <p className="mt-5 font-display text-lg font-semibold tracking-tight text-foreground">
+                        {item.label}
+                      </p>
+                      <p className="mt-2 max-w-[15rem] text-sm leading-relaxed text-muted">
+                        {item.detail}
+                      </p>
+                    </li>
+                  ))}
+                </ol>
+              </div>
             </div>
 
             <div className="grid gap-px border-t border-border bg-border sm:grid-cols-3">
