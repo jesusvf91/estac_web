@@ -11,6 +11,28 @@ Sitio corporativo de Estac: empresa tecnológica que ayuda a negocios a crecer d
 - Tailwind CSS
 - Framer Motion
 
+## Deploy
+
+El sitio se exporta estático (`output: "export"` → carpeta `out`).
+
+### Cloudflare Pages (producción: https://estac.cl)
+
+- Build command: `npm run build`
+- Output directory: `out`
+- Node: 22
+- **No** definir `PAGES_BASE_PATH`
+
+### GitHub Pages
+
+El workflow en `.github/workflows/deploy-pages.yml` construye sin `basePath` para dominio raíz.
+
+Si publicas solo en `https://USER.github.io/estac_web`, define en el build:
+
+```yaml
+env:
+  PAGES_BASE_PATH: /estac_web
+```
+
 ## Desarrollo
 
 ```bash
@@ -23,7 +45,7 @@ Abre [http://localhost:3000](http://localhost:3000).
 ## Scripts
 
 - `npm run dev` — servidor de desarrollo
-- `npm run build` — build de producción
+- `npm run build` — build de producción (estático en `out/`)
 - `npm run start` — servir build
 - `npm run lint` — ESLint
 

@@ -8,7 +8,8 @@ type LogoProps = {
   variant?: LogoVariant;
 };
 
-/** Prefijo de GitHub Pages (ej. /estac_web). Vacío en local. */
+/** Prefijo opcional para subrutas (ej. /estac_web en GitHub Pages).
+ * Vacío en dominio raíz (estac.cl / Cloudflare). */
 const basePath = process.env.PAGES_BASE_PATH || "";
 
 function asset(path: string) {

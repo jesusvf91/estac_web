@@ -37,10 +37,10 @@ jobs:
           enablement: true
 
       - name: Build with Next.js
+        # Dominio raíz (estac.cl / Cloudflare): sin basePath.
+        # Si se vuelve a publicar solo en github.io/estac_web, definir
+        # PAGES_BASE_PATH: /estac_web en este step.
         run: npm run build
-        env:
-          # Project site: https://jesusvf91.github.io/estac_web
-          PAGES_BASE_PATH: /estac_web
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v4
