@@ -31,12 +31,14 @@ env:
 Usamos [Web3Forms](https://web3forms.com): el navegador envía el mensaje por HTTPS a su API y llega a tu email.
 
 1. Crea un Access Key en web3forms.com con el email donde quieres recibir los leads.
-2. En el repo de GitHub: **Settings → Secrets and variables → Actions → New repository secret**
+2. En el repo de GitHub: **Settings → Environments → `estac` → Environment secrets**
 
 ```text
 Name:  NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY
 Value: tu-access-key
 ```
+
+   (El job de build usa `environment: estac`, así que debe ser un *environment secret*, no solo un secret de Actions a nivel repo.)
 
 3. Haz push a `main` (o `workflow_dispatch`) para que el build inyecte la variable.
 4. En el dashboard de Web3Forms, restringe el dominio a `estac.cl` si está disponible en tu plan.
