@@ -34,11 +34,11 @@ Usamos [Web3Forms](https://web3forms.com): el navegador envía el mensaje por HT
 2. En el repo de GitHub: **Settings → Secrets and variables → Actions → New repository secret**
 
 ```text
-Name:  WEB3FORMS_ACCESS_KEY
+Name:  NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY
 Value: tu-access-key
 ```
 
-3. Haz push a `main` (o `workflow_dispatch`) para que el build inyecte `NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY`.
+3. Haz push a `main` (o `workflow_dispatch`) para que el build inyecte la variable.
 4. En el dashboard de Web3Forms, restringe el dominio a `estac.cl` si está disponible en tu plan.
 
 Sin ese secret, el formulario usa `mailto:` como respaldo.
