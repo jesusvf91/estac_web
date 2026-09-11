@@ -22,6 +22,24 @@ El sitio se exporta estático (`output: "export"` → carpeta `out`).
 - Node: 22
 - **No** definir `PAGES_BASE_PATH`
 
+### Formulario de contacto (sin backend)
+
+Usamos [Web3Forms](https://web3forms.com): el navegador envía el mensaje por HTTPS a su API y llega a tu email.
+
+1. Crea un Access Key en web3forms.com con el email donde quieres recibir los leads.
+2. En Cloudflare Pages → Settings → Environment variables, agrega:
+
+```text
+NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY=tu-access-key
+```
+
+3. Redeploy (la variable se inyecta en el build estático).
+4. En el dashboard de Web3Forms, restringe el dominio a `estac.cl` si está disponible en tu plan.
+
+Sin esa variable, el formulario usa `mailto:` como respaldo.
+
+Protecciones incluidas: honeypot anti-bot, validación de email, límites de largo y bloqueo de doble envío.
+
 ### GitHub Pages
 
 El workflow en `.github/workflows/deploy-pages.yml` construye sin `basePath` para dominio raíz.

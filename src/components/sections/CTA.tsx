@@ -1,38 +1,132 @@
 "use client";
 
-import { type FormEvent } from "react";
+import { useState, type FormEvent } from "react";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { Button } from "@/components/ui/Button";
 import { Section } from "@/components/ui/Section";
+import { formConfig, isFormBackendConfigured } from "@/lib/forms";
 import { site } from "@/lib/site";
 
+type Status = "idle" | "submitting" | "success" | "error";
+
+const fieldClassName =
+  "w-full rounded-xl border border-border bg-white px-3.5 py-3 text-sm text-foreground outline-none transition focus:border-brand focus:ring-2 focus:ring-brand/20 disabled:opacity-60";
+
 export function CTA() {
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  const [status, setStatus] = useState<Status>("idle");
+  const [errorMessage, setErrorMessage] = useState("");
+  const configured = isFormBackendConfigured();
+
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (status === "submitting") return;
+
     const form = event.currentTarget;
     const data = new FormData(form);
+
+    // Honeypot: si un bot lo completa, fingimos éxito y no enviamos.
+    if (String(data.get("botcheck") || "")) {
+      setStatus("success");
+      form.reset();
+      return;
+    }
+
     const name = String(data.get("name") || "").trim();
     const email = String(data.get("email") || "").trim();
     const company = String(data.get("company") || "").trim();
     const role = String(data.get("role") || "").trim();
     const message = String(data.get("message") || "").trim();
 
-    const subject = encodeURIComponent(
-      `Desafío tecnológico — ${company || name || "Estac"}`,
-    );
-    const body = encodeURIComponent(
-      [
-        `Nombre: ${name}`,
-        `Email: ${email}`,
-        `Empresa: ${company}`,
-        `Rol: ${role}`,
-        "",
-        "Desafío:",
-        message,
-      ].join("\n"),
-    );
+    if (!name || !email || !message) {
+      setStatus("error");
+      setErrorMessage("Completa nombre, email y el desafío técnico.");
+      return;
+    }
 
-    window.location.href = `mailto:${site.email}?subject=${subject}&body=${body}`;
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setStatus("error");
+      setErrorMessage("Ingresa un email válido.");
+      return;
+    }
+
+    if (
+      name.length > formConfig.limits.name ||
+      email.length > formConfig.limits.email ||
+      company.length > formConfig.limits.company ||
+      role.length > formConfig.limits.role ||
+      message.length > formConfig.limits.message
+    ) {
+      setStatus("error");
+      setErrorMessage("Algunos campos exceden el largo permitido.");
+      return;
+    }
+
+    // Sin Access Key: fallback mailto (útil en local / antes de configurar).
+    if (!configured) {
+      const subject = encodeURIComponent(
+        `Desafío tecnológico — ${company || name || "Estac"}`,
+      );
+      const body = encodeURIComponent(
+        [
+          `Nombre: ${name}`,
+          `Email: ${email}`,
+          `Empresa: ${company}`,
+          `Rol: ${role}`,
+          "",
+          "Desafío:",
+          message,
+        ].join("\n"),
+      );
+      window.location.href = `mailto:${site.email}?subject=${subject}&body=${body}`;
+      return;
+    }
+
+    setStatus("submitting");
+    setErrorMessage("");
+
+    const payload = {
+      access_key: formConfig.accessKey,
+      subject: formConfig.subject,
+      from_name: formConfig.fromName,
+      name,
+      email,
+      company,
+      role,
+      message,
+      botcheck: false,
+    };
+
+    try {
+      const response = await fetch(formConfig.endpoint, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const result = (await response.json()) as {
+        success?: boolean;
+        message?: string;
+      };
+
+      if (!response.ok || !result.success) {
+        throw new Error(
+          result.message || "No pudimos enviar el mensaje. Intenta de nuevo.",
+        );
+      }
+
+      setStatus("success");
+      form.reset();
+    } catch (error) {
+      setStatus("error");
+      setErrorMessage(
+        error instanceof Error
+          ? error.message
+          : "No pudimos enviar el mensaje. Intenta de nuevo o escríbenos por email.",
+      );
+    }
   }
 
   return (
@@ -60,7 +154,10 @@ export function CTA() {
                   "Puedes comenzar con Discovery, PoC o un proyecto concreto.",
                 ].map((item) => (
                   <li key={item} className="flex gap-3">
-                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-teal" aria-hidden />
+                    <span
+                      className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-teal"
+                      aria-hidden
+                    />
                     {item}
                   </li>
                 ))}
@@ -76,49 +173,116 @@ export function CTA() {
             </div>
 
             <div className="rounded-2xl border border-border bg-white p-6 shadow-[0_24px_60px_-45px_rgba(9,64,84,0.5)] sm:p-7">
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <Field id="name" label="Nombre" placeholder="Tu nombre" required />
-                <Field
-                  id="email"
-                  label="Email"
-                  type="email"
-                  placeholder="nombre@empresa.com"
-                  required
-                />
-                <Field
-                  id="company"
-                  label="Empresa"
-                  placeholder="Nombre de la empresa"
-                />
-                <Field
-                  id="role"
-                  label="Rol"
-                  placeholder="Tu rol en la empresa"
-                />
-                <div>
-                  <label
-                    htmlFor="message"
-                    className="mb-1.5 block text-sm font-medium text-foreground"
+              {status === "success" ? (
+                <div className="space-y-4 py-2" role="status" aria-live="polite">
+                  <p className="font-display text-xl font-semibold tracking-tight text-foreground">
+                    Mensaje enviado
+                  </p>
+                  <p className="text-sm leading-relaxed text-muted">
+                    Gracias. Revisaremos tu desafío y te contactaremos pronto.
+                  </p>
+                  <Button
+                    type="button"
+                    variant="secondary"
+                    onClick={() => setStatus("idle")}
                   >
-                    Desafío técnico
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    required
-                    rows={4}
-                    placeholder="Describe el problema, el contexto y lo que necesitas lograr..."
-                    className="w-full resize-none rounded-xl border border-border bg-white px-3.5 py-3 text-sm text-foreground outline-none transition focus:border-brand focus:ring-2 focus:ring-brand/20"
-                  />
+                    Enviar otro mensaje
+                  </Button>
                 </div>
-                <Button type="submit" className="w-full" size="lg">
-                  Hablemos
-                </Button>
-                <p className="text-xs leading-relaxed text-muted">
-                  Al enviar se abrirá tu cliente de correo con el mensaje listo
-                  para enviarnos.
-                </p>
-              </form>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-4" noValidate>
+                  {/* Honeypot anti-bot: oculto para humanos */}
+                  <div
+                    className="pointer-events-none absolute -left-[9999px] top-auto h-0 w-0 overflow-hidden opacity-0"
+                    aria-hidden
+                  >
+                    <label htmlFor="botcheck">No completar</label>
+                    <input
+                      id="botcheck"
+                      type="checkbox"
+                      name="botcheck"
+                      tabIndex={-1}
+                      autoComplete="off"
+                    />
+                  </div>
+
+                  <Field
+                    id="name"
+                    label="Nombre"
+                    placeholder="Tu nombre"
+                    required
+                    maxLength={formConfig.limits.name}
+                    disabled={status === "submitting"}
+                  />
+                  <Field
+                    id="email"
+                    label="Email"
+                    type="email"
+                    placeholder="nombre@empresa.com"
+                    required
+                    maxLength={formConfig.limits.email}
+                    disabled={status === "submitting"}
+                    autoComplete="email"
+                  />
+                  <Field
+                    id="company"
+                    label="Empresa"
+                    placeholder="Nombre de la empresa"
+                    maxLength={formConfig.limits.company}
+                    disabled={status === "submitting"}
+                    autoComplete="organization"
+                  />
+                  <Field
+                    id="role"
+                    label="Rol"
+                    placeholder="Tu rol en la empresa"
+                    maxLength={formConfig.limits.role}
+                    disabled={status === "submitting"}
+                    autoComplete="organization-title"
+                  />
+                  <div>
+                    <label
+                      htmlFor="message"
+                      className="mb-1.5 block text-sm font-medium text-foreground"
+                    >
+                      Desafío técnico
+                    </label>
+                    <textarea
+                      id="message"
+                      name="message"
+                      required
+                      rows={4}
+                      maxLength={formConfig.limits.message}
+                      disabled={status === "submitting"}
+                      placeholder="Describe el problema, el contexto y lo que necesitas lograr..."
+                      className={`${fieldClassName} resize-none`}
+                    />
+                  </div>
+
+                  {status === "error" ? (
+                    <p
+                      className="rounded-xl border border-red-200 bg-red-50 px-3.5 py-3 text-sm text-red-800"
+                      role="alert"
+                    >
+                      {errorMessage}
+                    </p>
+                  ) : null}
+
+                  <Button
+                    type="submit"
+                    className="w-full"
+                    size="lg"
+                    disabled={status === "submitting"}
+                  >
+                    {status === "submitting" ? "Enviando…" : "Hablemos"}
+                  </Button>
+                  <p className="text-xs leading-relaxed text-muted">
+                    {configured
+                      ? "Tu mensaje se envía de forma segura. No compartimos tus datos con terceros."
+                      : "Al enviar se abrirá tu cliente de correo con el mensaje listo para enviarnos."}
+                  </p>
+                </form>
+              )}
             </div>
           </div>
         </div>
@@ -173,12 +337,18 @@ function Field({
   placeholder,
   type = "text",
   required = false,
+  maxLength,
+  disabled = false,
+  autoComplete,
 }: {
   id: string;
   label: string;
   placeholder: string;
   type?: string;
   required?: boolean;
+  maxLength?: number;
+  disabled?: boolean;
+  autoComplete?: string;
 }) {
   return (
     <div>
@@ -194,7 +364,10 @@ function Field({
         type={type}
         required={required}
         placeholder={placeholder}
-        className="w-full rounded-xl border border-border bg-white px-3.5 py-3 text-sm text-foreground outline-none transition focus:border-brand focus:ring-2 focus:ring-brand/20"
+        maxLength={maxLength}
+        disabled={disabled}
+        autoComplete={autoComplete}
+        className={fieldClassName}
       />
     </div>
   );
