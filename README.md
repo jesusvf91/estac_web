@@ -13,32 +13,7 @@ Sitio corporativo de Estac: empresa tecnológica que ayuda a negocios a crecer d
 
 ## Deploy
 
-El sitio se exporta estático (`output: "export"` → carpeta `out`).
-
-### Cloudflare Pages (producción: https://estac.cl)
-
-- Build command: `npm run build`
-- Output directory: `out`
-- Node: 22
-- **No** definir `PAGES_BASE_PATH`
-
-### Formulario de contacto (sin backend)
-
-Usamos [Web3Forms](https://web3forms.com): el navegador envía el mensaje por HTTPS a su API y llega a tu email.
-
-1. Crea un Access Key en web3forms.com con el email donde quieres recibir los leads.
-2. En Cloudflare Pages → Settings → Environment variables, agrega:
-
-```text
-NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY=tu-access-key
-```
-
-3. Redeploy (la variable se inyecta en el build estático).
-4. En el dashboard de Web3Forms, restringe el dominio a `estac.cl` si está disponible en tu plan.
-
-Sin esa variable, el formulario usa `mailto:` como respaldo.
-
-Protecciones incluidas: honeypot anti-bot, validación de email, límites de largo y bloqueo de doble envío.
+El sitio se exporta estático (`output: "export"` → carpeta `out`) y se publica con **GitHub Actions → GitHub Pages**. Cloudflare solo apunta el DNS de NIC Chile (`estac.cl`) hacia Pages.
 
 ### GitHub Pages
 
@@ -50,6 +25,25 @@ Si publicas solo en `https://USER.github.io/estac_web`, define en el build:
 env:
   PAGES_BASE_PATH: /estac_web
 ```
+
+### Formulario de contacto (sin backend)
+
+Usamos [Web3Forms](https://web3forms.com): el navegador envía el mensaje por HTTPS a su API y llega a tu email.
+
+1. Crea un Access Key en web3forms.com con el email donde quieres recibir los leads.
+2. En el repo de GitHub: **Settings → Secrets and variables → Actions → New repository secret**
+
+```text
+Name:  WEB3FORMS_ACCESS_KEY
+Value: tu-access-key
+```
+
+3. Haz push a `main` (o `workflow_dispatch`) para que el build inyecte `NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY`.
+4. En el dashboard de Web3Forms, restringe el dominio a `estac.cl` si está disponible en tu plan.
+
+Sin ese secret, el formulario usa `mailto:` como respaldo.
+
+Protecciones incluidas: honeypot anti-bot, validación de email, límites de largo y bloqueo de doble envío.
 
 ## Desarrollo
 
